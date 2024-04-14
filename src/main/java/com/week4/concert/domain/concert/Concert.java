@@ -1,10 +1,5 @@
 package com.week4.concert.domain.concert;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-
 public record Concert(
 
         Long id,
@@ -13,6 +8,7 @@ public record Concert(
         Integer reservedCount,
         Integer price,
         String date
-){
+) {
+
 }
 
