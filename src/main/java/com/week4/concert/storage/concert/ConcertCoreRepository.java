@@ -19,7 +19,8 @@ public class ConcertCoreRepository implements ConcertRepository {
     @Override
     public Concert getConcertInfo(String date, String title) {
         return concertJpaRepository.findByDateAndTitle(date,title)
-                .orElseThrow(() -> new EntityNotFoundException("조회되는 콘서트가 없습니다."));
+                .orElseThrow(() -> new EntityNotFoundException("조회되는 콘서트가 없습니다."))
+                .toConcert();
 
     }
 
@@ -27,6 +28,8 @@ public class ConcertCoreRepository implements ConcertRepository {
     public List<Concert> findAvailableConcertAndDate() {
         return concertJpaRepository.findAvailableConcertAndDate()
                 .filter(list -> !list.isEmpty())
-                .orElseThrow(()-> new EntityNotFoundException("예약가능한 콘서트 날짜가 없습니다."));
+                .orElseThrow(()-> new EntityNotFoundException("예약가능한 콘서트 날짜가 없습니다."))
+                .stream().map(ConcertEntity::toConcert)
+                .toList();
     }
 }

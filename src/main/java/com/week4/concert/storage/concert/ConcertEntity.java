@@ -1,5 +1,6 @@
 package com.week4.concert.storage.concert;
 
+import com.week4.concert.domain.concert.Concert;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -22,12 +23,16 @@ public class ConcertEntity {
     @Column(name = "capacity" ,nullable = false)
     private Integer capacity;
 
-    @Column(name = "reservedCount" ,nullable = false)
+    @Column(name = "reserved_count" ,nullable = false)
     private Integer reservedCount;
 
     @Column(name = "price" ,nullable = false)
     private Integer price;
 
-    @Column(name = "date" ,nullable = false)
+    @Column(name = "concert_date" ,nullable = false)
     private String date;
+
+    public Concert toConcert(){
+        return new Concert(getId(),title,capacity,reservedCount,price,date);
+    }
 }
