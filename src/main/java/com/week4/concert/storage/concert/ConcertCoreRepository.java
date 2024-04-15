@@ -29,7 +29,8 @@ public class ConcertCoreRepository implements ConcertRepository {
         return concertJpaRepository.findAvailableConcertAndDate()
                 .filter(list -> !list.isEmpty())
                 .orElseThrow(()-> new EntityNotFoundException("예약가능한 콘서트 날짜가 없습니다."))
-                .stream().map(ConcertEntity::toConcert)
+                .stream()
+                .map(ConcertEntity::toConcert)
                 .toList();
     }
 }

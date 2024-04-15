@@ -13,8 +13,8 @@ public class ConcertReader {
         this.concertRepository = concertRepository;
     }
 
-    public Concert getConcertInfo(String concert_date, String concert_title) {
-        return concertRepository.getConcertInfo(concert_date, concert_title);
+    public Concert getConcertInfo(String date, String title) {
+        return concertRepository.getConcertInfo(date, title);
     }
 
     public List<Concert> findAvailableConcertAndDate() {
