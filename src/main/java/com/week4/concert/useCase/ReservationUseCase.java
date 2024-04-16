@@ -21,14 +21,8 @@ public class ReservationUseCase {
     public List<Integer> selectAvailableSeat(String date, String title){
 
         Integer capactiy = concertService.getConcertInfo(date,title).capacity();
-        List<Integer> reserved = reservationService.reservedSeat(date,title);
 
-        List<Integer> availableSeat = new LinkedList<>();
-        for (int i = 1; i <= capactiy; i++) availableSeat.add(i);
-        for (int i = 0; i < reserved.size(); i++) {
-            int temp = availableSeat.indexOf(reserved.get(i));
-            availableSeat.remove(temp);
-        }
+        List<Integer> availableSeat = reservationService.availableSeat(date,title,capactiy);
 
         return availableSeat;
     }
