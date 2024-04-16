@@ -1,8 +1,10 @@
 package com.week4.concert;
 
 import com.week4.concert.domain.concert.Concert;
+import com.week4.concert.domain.queue.ongoing.Ongoing;
 import com.week4.concert.domain.reservation.Reservation;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +30,19 @@ public class Fixtures {
             List<Integer> list = new ArrayList<>();
             for(int i = 1 ; i <=10 ; i++) list.add(i);
             return list;
+        }
+        return null;
+    }
+
+    public static Ongoing ongoing(Long userId){
+        if(userId == 1L){
+          return new Ongoing(1L,userId, LocalDateTime.now());
+        }
+        if(userId == 2L){
+            return new Ongoing(2L,userId, LocalDateTime.now());
+        }
+        if(userId == 3L){
+            return new Ongoing(3L,userId, LocalDateTime.now());
         }
         return null;
     }

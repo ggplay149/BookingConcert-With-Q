@@ -1,5 +1,6 @@
 package com.week4.concert.storage.queue.ongoing;
 
+import com.week4.concert.domain.queue.ongoing.Ongoing;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -7,7 +8,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "concert")
+@Table(name = "ongoing")
 @Builder
 @Setter
 @Getter
@@ -26,5 +27,9 @@ public class OngoingEntity {
     @Column(name = "created_at")
     @CreationTimestamp
     private LocalDateTime createdAt;
+
+    public Ongoing toOngoing(){
+        return new Ongoing(getId(),userId,createdAt);
+    }
 
 }

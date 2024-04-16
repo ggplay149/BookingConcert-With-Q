@@ -1,5 +1,7 @@
 package com.week4.concert.storage.queue.waiting;
 
+import com.week4.concert.domain.queue.ongoing.Ongoing;
+import com.week4.concert.domain.queue.waiting.Waiting;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -7,7 +9,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "concert")
+@Table(name = "waiting")
 @Builder
 @Setter
 @Getter
@@ -26,5 +28,9 @@ public class WaitingEntity {
     @Column(name = "created_at")
     @CreationTimestamp
     private LocalDateTime createdAt;
+
+    public Waiting toWaiting(){
+        return new Waiting(getId(),userId,createdAt);
+    }
 
 }

@@ -11,7 +11,7 @@ public class OngoingAppender {
         this.ongoingRepository = ongoingRepository;
     }
 
-    void save(Long userId){
+    public void save(Long userId){
         ongoingRepository.save(userId);
     }
 }
