@@ -1,4 +1,4 @@
-package com.week4.concert.api.concert.dto;
+package com.week4.concert.api.dto;
 
 public record ConcertRequest(
         String title,

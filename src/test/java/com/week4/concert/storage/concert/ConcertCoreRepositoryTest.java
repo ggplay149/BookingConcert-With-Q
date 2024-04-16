@@ -1,12 +1,17 @@
 package com.week4.concert.storage.concert;
 
+import com.week4.concert.domain.concert.Concert;
+import com.week4.concert.domain.user.User;
 import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Optional;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 
 public class ConcertCoreRepositoryTest {
@@ -27,6 +32,8 @@ public class ConcertCoreRepositoryTest {
     @DisplayName("날짜와 제목으로 조회했을때, 없는 콘서트")
     void when_not_found_concert_Info_then_error() {
         //given
+        given(concertJpaRepository.findByDateAndTitle(concertDate,concertTitle)).willReturn(Optional.empty());
+
         //when
         Exception e = assertThrows(EntityNotFoundException.class, () -> concertCoreRepository.getConcertInfo(concertDate, concertTitle));
         //then
@@ -37,6 +44,7 @@ public class ConcertCoreRepositoryTest {
     @DisplayName("예약가능 콘서트가 없음")
     void when_not_found_available_concert_then_error() {
         //given
+        given(concertJpaRepository.findAvailableConcertAndDate()).willReturn(Optional.empty());
         //when
         Exception e = assertThrows(EntityNotFoundException.class, () -> concertCoreRepository.findAvailableConcertAndDate());
         //then

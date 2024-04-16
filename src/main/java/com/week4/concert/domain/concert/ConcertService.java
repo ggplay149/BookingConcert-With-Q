@@ -1,6 +1,5 @@
 package com.week4.concert.domain.concert;
 
-import com.week4.concert.api.concert.dto.ConcertResponse;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

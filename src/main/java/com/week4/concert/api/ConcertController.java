@@ -1,6 +1,6 @@
-package com.week4.concert.api.concert;
+package com.week4.concert.api;
 
-import com.week4.concert.api.concert.dto.ConcertResponse;
+import com.week4.concert.api.dto.ConcertResponse;
 import com.week4.concert.domain.concert.ConcertService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -26,12 +26,4 @@ public class ConcertController {
                 .availableConcert(concertService.showAvailableConcertList())
                 .build());
     }
-
-//    @Operation(summary = "해당날짜/해당공연의 잔여좌석 조회", description = "Parameter example) concert_date : 20241112, concert_title : MuseConcert")
-//    @GetMapping("/availableSeat")
-//    public ResponseEntity<ConcertResponse> findAvailableSeat(
-//            @RequestParam("concert_date") String concert_date, @RequestParam("concert_title") String concert_title) {
-//        return ResponseEntity.ok().body();
-//    }
-
 }

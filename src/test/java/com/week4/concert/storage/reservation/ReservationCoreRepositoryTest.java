@@ -5,8 +5,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Optional;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 
 public class ReservationCoreRepositoryTest {
@@ -27,6 +30,7 @@ public class ReservationCoreRepositoryTest {
     @DisplayName("날짜와 제목으로 조회했을 때, 예약된 좌석 없음")
     void when_not_found_reserved_seat_then_error() {
         //given
+        given(reservationJpaRepository.selectReservedSeat(concertDate,concertTitle)).willReturn(Optional.empty());
         // when
         Exception e = assertThrows(EntityNotFoundException.class, () -> reservationCoreRepository.selectReservedSeat(concertDate,concertTitle));
         //then
