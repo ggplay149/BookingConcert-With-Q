@@ -38,8 +38,8 @@ public class QueueUseCaseTest {
         given(ongoingSerivce.countOngoing()).willReturn(48);
 
         List<Waiting> testWaitingList = new ArrayList<>();
-        testWaitingList.add(new Waiting(1L,1l, LocalDateTime.now()));
-        testWaitingList.add(new Waiting(2L,2l, LocalDateTime.now()));
+        testWaitingList.add(new Waiting(1L,1l, LocalDateTime.now(),"waiting"));
+        testWaitingList.add(new Waiting(2L,2l, LocalDateTime.now(),"waiting"));
         given(waitingService.selectTopN(50-48)).willReturn(testWaitingList);
 
         //when

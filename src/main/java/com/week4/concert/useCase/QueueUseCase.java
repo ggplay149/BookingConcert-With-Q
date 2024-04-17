@@ -1,5 +1,6 @@
 package com.week4.concert.useCase;
 
+import com.week4.concert.domain.queue.ongoing.Ongoing;
 import com.week4.concert.domain.queue.ongoing.OngoingSerivce;
 import com.week4.concert.domain.queue.waiting.Waiting;
 import com.week4.concert.domain.queue.waiting.WaitingService;
@@ -18,21 +19,31 @@ public class QueueUseCase {
         this.ongoingSerivce = ongoingSerivce;
     }
 
-    public void queueUpdate(){
+    public void queueUpdate() {
 
         int ongoingCount = ongoingSerivce.countOngoing();
 
-        if(ongoingCount < 50){
+        if (ongoingCount < 50) {
 
-            List<Waiting> nextUserList =  waitingService.selectTopN(50-ongoingCount);
+            List<Waiting> nextUserList = waitingService.selectTopN(50 - ongoingCount);
 
-            for(Waiting waitingUser : nextUserList){
+            for (Waiting waitingUser : nextUserList) {
 
                 ongoingSerivce.insert(waitingUser.userId());
 
-                waitingService.remove(waitingUser.id());
+                waitingService.updateDone(waitingUser.id()); // soft delete ) status => Done'
 
             }
+        }
+    }
+
+    public void insertQueue(Long userId) {
+
+        String waitingResult = waitingService.checkbeforeInsert(userId);
+        String ongoingResult = ongoingSerivce.checkbeforeInsert(userId);
+
+        if (waitingResult.equals("Not Exist") && ongoingResult.equals("Not Exist")) {
+            waitingService.insert(userId);
         }
     }
 }

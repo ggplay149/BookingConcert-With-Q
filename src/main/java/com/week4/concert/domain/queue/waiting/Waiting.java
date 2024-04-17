@@ -5,6 +5,10 @@ import java.time.LocalDateTime;
 public record Waiting(
         Long id,
         Long userId,
-        LocalDateTime createdAt
+        LocalDateTime createdAt,
+        String status
 ) {
+    public Waiting changeStatus(String status){
+        return new Waiting(id(),userId(),createdAt(),status);
+    }
 }

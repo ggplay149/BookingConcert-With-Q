@@ -10,7 +10,7 @@ public class WaitingRemover {
         this.waitingRepository = waitingRepository;
     }
 
-    public void remove(Long userId) {
-        waitingRepository.deleteById(userId);
+    public void updateDone(Long id) {
+        waitingRepository.updateDone(id);
     }
 }

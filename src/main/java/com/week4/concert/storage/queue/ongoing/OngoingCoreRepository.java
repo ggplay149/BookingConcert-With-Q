@@ -11,10 +11,8 @@ package com.week4.concert.storage.queue.ongoing;
 import com.week4.concert.domain.queue.ongoing.Ongoing;
 import com.week4.concert.domain.queue.ongoing.OngoingRepository;
 import jakarta.persistence.EntityNotFoundException;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public class OngoingCoreRepository implements OngoingRepository {
@@ -28,8 +26,8 @@ public class OngoingCoreRepository implements OngoingRepository {
 
     @Override
     public Ongoing check(Long uesrId) {
-        return ongoingJpaRepository.findByUserId(uesrId)
-                .orElseThrow(()->new EntityNotFoundException("활성화된 유저가 아닙니다."))
+        return ongoingJpaRepository.check(uesrId)
+                .orElseThrow(() -> new EntityNotFoundException("활성화된 유저가 아닙니다."))
                 .toOngoing();
     }
 
@@ -39,12 +37,17 @@ public class OngoingCoreRepository implements OngoingRepository {
     }
 
     @Override
+    @Transactional
     public void save(Long userId) {
-        ongoingJpaRepository.save(OngoingEntity.builder().userId(userId).build());
+        ongoingJpaRepository.save(OngoingEntity.builder()
+                .userId(userId)
+                .status("Ongoing")
+                .build());
     }
 
     @Override
-    public void deleteById(Long userId) {
-        ongoingJpaRepository.deleteById(userId);
+    @Transactional
+    public void updateDone(Long userId) {
+        ongoingJpaRepository.updateDone(userId);
     }
 }

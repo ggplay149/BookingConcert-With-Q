@@ -10,7 +10,7 @@ public class OngoingRemover {
         this.ongoingRepository = ongoingRepository;
     }
 
-    public void remove(Long userId){
-        ongoingRepository.deleteById(userId);
+    public void updateDone(Long userId){
+        ongoingRepository.updateDone(userId);
     }
 }

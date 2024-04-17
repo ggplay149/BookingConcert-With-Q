@@ -1,5 +1,6 @@
 package com.week4.concert.domain.queue.waiting;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,15 +18,25 @@ public class WaitingService {
         this.waitingRemover = waitingRemover;
     }
 
-    public List<Waiting> selectTopN(int topN){
-        return waitingReader.selectTopN(topN);
+    public Waiting check(Long userId) {return waitingReader.check(userId);}
+
+    public String checkbeforeInsert(Long userId){
+        try{
+            check(userId);
+            return "Exist";
+        }catch (Exception e){
+            return "Not Exist";
+        }
     }
+
+
+    public List<Waiting> selectTopN(int topN) {return waitingReader.selectTopN(topN);}
 
     public void insert(Long userId) {
         waitingAppender.save(userId);
     }
 
-    public void remove(Long userId) {
-        waitingRemover.remove(userId);
+    public void updateDone(Long id) {
+        waitingRemover.updateDone(id);
     }
 }

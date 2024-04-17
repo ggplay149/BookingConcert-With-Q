@@ -1,5 +1,6 @@
 package com.week4.concert.UnitTest.domain.queue.waiting;
 
+import com.week4.concert.Fixtures;
 import com.week4.concert.domain.queue.ongoing.OngoingAppender;
 import com.week4.concert.domain.queue.ongoing.OngoingReader;
 import com.week4.concert.domain.queue.ongoing.OngoingRemover;
@@ -33,12 +34,25 @@ public class WaitingServiceTest {
     }
 
     @Test
+    @DisplayName("Waiting service check 성공")
+    void check() {
+        //given
+        Long userId = 1L;
+        Waiting testUser = Fixtures.waiting(userId);
+        given(waitingService.check(userId)).willReturn(testUser);
+        //when
+        Waiting result = waitingReader.check(userId);
+        //then
+        assertThat(result.userId()).isEqualTo(userId);
+    }
+
+    @Test
     @DisplayName("Waiting service 가장 우선순위 N명 아이디 select")
     void selectTopN() {
         //given
         List<Waiting> testList = new ArrayList<>();
-        testList.add(new Waiting(1L,1L, LocalDateTime.now()));
-        testList.add(new Waiting(2L,2L, LocalDateTime.now()));
+        testList.add(new Waiting(1L,1L, LocalDateTime.now(),"waiting"));
+        testList.add(new Waiting(2L,2L, LocalDateTime.now(),"waiting"));
         given(waitingReader.selectTopN(2)).willReturn(testList);
         //when
         List<Waiting> result = waitingService.selectTopN(2);
@@ -59,12 +73,12 @@ public class WaitingServiceTest {
     }
 
     @Test
-    @DisplayName("Waiting service remove 성공")
+    @DisplayName("Waiting service updateDone 성공")
     void remove() {
         //given
         Long userId = 1000L;
         //when
-        waitingService.remove(userId);
+        waitingService.updateDone(userId);
         //then
     }
 }

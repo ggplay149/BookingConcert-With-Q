@@ -25,7 +25,7 @@ public class OngoingRemoverTest {
         //given
         Long userId = 1000L;
         //when
-        ongoingRemover.remove(userId);
+        ongoingRemover.updateDone(userId);
         //then
     }
 }

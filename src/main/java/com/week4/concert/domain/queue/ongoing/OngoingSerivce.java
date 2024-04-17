@@ -1,5 +1,6 @@
 package com.week4.concert.domain.queue.ongoing;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -20,6 +21,15 @@ public class OngoingSerivce {
         return ongoingReader.check(userId);
     }
 
+    public String checkbeforeInsert(Long userId){
+        try {
+            check(userId);
+            return "Exist";
+        }catch (Exception e) {
+            return "Not Exist";
+        }
+    }
+
     public Integer countOngoing() {
         return ongoingReader.countOngoing();
     }
@@ -28,7 +38,7 @@ public class OngoingSerivce {
         ongoingAppender.save(userId);
     }
 
-    public void remove(Long userId){
-        ongoingRemover.remove(userId);
+    public void updateDone(Long userId){
+        ongoingRemover.updateDone(userId);
     }
 }

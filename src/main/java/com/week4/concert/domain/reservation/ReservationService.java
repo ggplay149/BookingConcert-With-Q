@@ -18,7 +18,7 @@ public class ReservationService {
         return reservationReader.reservedSeat(date,title);
     }
 
-    public List<Integer> availableSeat(String date, String title, int capacity){
+    public List<Integer> availableSeat(String date, String title, Integer capacity){
 
         List<Integer> reserved = reservedSeat(date,title);
 
