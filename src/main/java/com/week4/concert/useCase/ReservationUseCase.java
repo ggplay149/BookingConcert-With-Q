@@ -4,7 +4,6 @@ import com.week4.concert.domain.concert.ConcertService;
 import com.week4.concert.domain.reservation.ReservationService;
 import org.springframework.stereotype.Component;
 
-import java.util.LinkedList;
 import java.util.List;
 
 @Component
@@ -18,11 +17,11 @@ public class ReservationUseCase {
         this.reservationService = reservationService;
     }
 
-    public List<Integer> selectAvailableSeat(String date, String title){
+    public List<Integer> selectAvailableSeat(String date, String title) {
 
-        Integer capactiy = concertService.getConcertInfo(date,title).capacity();
+        Integer capactiy = concertService.getConcertInfo(date, title).capacity();
 
-        List<Integer> availableSeat = reservationService.availableSeat(date,title,capactiy);
+        List<Integer> availableSeat = reservationService.availableSeat(date, title, capactiy);
 
         return availableSeat;
     }

@@ -1,11 +1,9 @@
 package com.week4.concert.useCase;
 
-import com.week4.concert.domain.queue.ongoing.Ongoing;
 import com.week4.concert.domain.queue.ongoing.OngoingSerivce;
 import com.week4.concert.domain.queue.waiting.Waiting;
 import com.week4.concert.domain.queue.waiting.WaitingService;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -20,7 +18,7 @@ public class QueueUseCase {
         this.ongoingSerivce = ongoingSerivce;
     }
 
-     public void queueUpdate() {
+    public void queueUpdate() {
 
         int ongoingCount = ongoingSerivce.countOngoing();
 
@@ -29,26 +27,31 @@ public class QueueUseCase {
             List<Waiting> nextUserList = waitingService.selectTopN(50 - ongoingCount);
 
             for (Waiting waitingUser : nextUserList) {
-
                 ongoingSerivce.insert(waitingUser.userId());
-
                 waitingService.updateDone(waitingUser.id()); // soft delete ) status => 'Done'
-
             }
+
         }
     }
 
-        public String insertQueue(Long userId) {
+    public String insertQueue(Long userId) {
 
         String waitingTable = waitingService.checkBeforeInsert(userId);
         String ongoingTable = ongoingSerivce.checkBeforeInsert(userId);
 
+        String resultMessage = "Blocked";
+
         if (waitingTable.equals("Not Exist") && ongoingTable.equals("Not Exist")) {
             waitingService.insert(userId);
-            return "Entry";
+            resultMessage ="Entry";
         }
 
-        return "Blocked";
+        queueUpdate();
+        return resultMessage;
+    }
 
+    public String checkQueue(Long userId) {
+        ongoingSerivce.check(userId);
+        return "활성화 된 유저입니다.";
     }
 }
