@@ -20,7 +20,7 @@ public class WaitingService {
 
     public Waiting check(Long userId) {return waitingReader.check(userId);}
 
-    public String checkbeforeInsert(Long userId){
+    public String checkBeforeInsert(Long userId){
         try{
             check(userId);
             return "Exist";

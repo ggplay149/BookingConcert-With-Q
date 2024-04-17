@@ -21,12 +21,21 @@ public class OngoingSerivce {
         return ongoingReader.check(userId);
     }
 
-    public String checkbeforeInsert(Long userId){
+    public String checkBeforeInsert(Long userId){
         try {
             check(userId);
             return "Exist";
         }catch (Exception e) {
             return "Not Exist";
+        }
+    }
+
+    public String checkBeforeAccess(Long userId){
+        try {
+            check(userId);
+            return "Ongoing";
+        }catch (Exception e) {
+            return e.getMessage();
         }
     }
 

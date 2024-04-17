@@ -40,8 +40,8 @@ public class QueueUseCase {
 
         public String insertQueue(Long userId) {
 
-        String waitingTable = waitingService.checkbeforeInsert(userId);
-        String ongoingTable = ongoingSerivce.checkbeforeInsert(userId);
+        String waitingTable = waitingService.checkBeforeInsert(userId);
+        String ongoingTable = ongoingSerivce.checkBeforeInsert(userId);
 
         if (waitingTable.equals("Not Exist") && ongoingTable.equals("Not Exist")) {
             waitingService.insert(userId);
