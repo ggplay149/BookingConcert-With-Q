@@ -14,6 +14,9 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.Optional;
+
 @Repository
 public class OngoingCoreRepository implements OngoingRepository {
 
@@ -33,7 +36,10 @@ public class OngoingCoreRepository implements OngoingRepository {
 
     @Override
     public Integer countOngoing() {
-        return ongoingJpaRepository.countOngoing();
+        Integer result = 0;
+        Optional<List<OngoingEntity>> list = ongoingJpaRepository.countOngoing();
+        if(list.isPresent()) result = list.get().size();
+        return result;
     }
 
     @Override

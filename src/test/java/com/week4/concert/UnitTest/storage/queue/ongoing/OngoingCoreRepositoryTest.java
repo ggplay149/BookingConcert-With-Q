@@ -61,10 +61,10 @@ public class OngoingCoreRepositoryTest {
     @DisplayName("Ongoing 유저수 조회")
     void success_Ongoing_count() {
         //given
-        given(ongoingJpaRepository.countOngoing()).willReturn(5);
+        given(ongoingJpaRepository.countOngoing()).willReturn(Optional.empty());
         //when
         Integer result = ongoingCoreRepository.countOngoing();
         //then
-        assertThat(result).isEqualTo(5);
+        assertThat(result).isEqualTo(0);
     }
 }

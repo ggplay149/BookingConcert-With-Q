@@ -5,6 +5,7 @@ import com.week4.concert.domain.queue.ongoing.OngoingSerivce;
 import com.week4.concert.domain.queue.waiting.Waiting;
 import com.week4.concert.domain.queue.waiting.WaitingService;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class QueueUseCase {
         this.ongoingSerivce = ongoingSerivce;
     }
 
-    public void queueUpdate() {
+     public void queueUpdate() {
 
         int ongoingCount = ongoingSerivce.countOngoing();
 
@@ -37,7 +38,7 @@ public class QueueUseCase {
         }
     }
 
-    public void insertQueue(Long userId) {
+        public void insertQueue(Long userId) {
 
         String waitingResult = waitingService.checkbeforeInsert(userId);
         String ongoingResult = ongoingSerivce.checkbeforeInsert(userId);
