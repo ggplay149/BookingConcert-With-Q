@@ -3,17 +3,15 @@ package com.week4.concert.IntegrationTest;
 import com.week4.concert.domain.queue.ongoing.OngoingSerivce;
 import com.week4.concert.domain.queue.waiting.WaitingService;
 import com.week4.concert.useCase.QueueUseCase;
-import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
-public class QueueUseCaseIntegrationTest {
+public class QueueIntegrationTest {
 
     @Autowired
     private OngoingSerivce ongoingSerivce;
@@ -46,11 +44,33 @@ public class QueueUseCaseIntegrationTest {
 
     @Test
     @DisplayName(" waiting or ongoing 테이블에 둘다 없으면 대기열입장 가능")
-    void insertQueue() {
+    void insertQueue1() {
         //given
         //when
-        queueUseCase.insertQueue(1L);
+        String result = queueUseCase.insertQueue(888L);
         //then
+        assertThat(result).isEqualTo("Entry");
     }
 
+    @Test
+    @DisplayName("waiting테이블 상태에 waiting 상태로 존재하면 추가 대기열입장 불가능")
+    void insertQueue2() {
+        //given
+        waitingService.insert(777L);
+        //when
+        String result = queueUseCase.insertQueue(777L);
+        //then
+        assertThat(result).isEqualTo("Blocked");
+    }
+
+    @Test
+    @DisplayName("ongoing테이블 상태에 ongoing 상태로 존재하면 추가 대기열입장 불가능")
+    void insertQueue3() {
+        //given
+        ongoingSerivce.insert(999L);
+        //when
+        String result = queueUseCase.insertQueue(999L);
+        //then
+        assertThat(result).isEqualTo("Blocked");
+    }
 }

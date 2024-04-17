@@ -32,19 +32,23 @@ public class QueueUseCase {
 
                 ongoingSerivce.insert(waitingUser.userId());
 
-                waitingService.updateDone(waitingUser.id()); // soft delete ) status => Done'
+                waitingService.updateDone(waitingUser.id()); // soft delete ) status => 'Done'
 
             }
         }
     }
 
-        public void insertQueue(Long userId) {
+        public String insertQueue(Long userId) {
 
-        String waitingResult = waitingService.checkbeforeInsert(userId);
-        String ongoingResult = ongoingSerivce.checkbeforeInsert(userId);
+        String waitingTable = waitingService.checkbeforeInsert(userId);
+        String ongoingTable = ongoingSerivce.checkbeforeInsert(userId);
 
-        if (waitingResult.equals("Not Exist") && ongoingResult.equals("Not Exist")) {
+        if (waitingTable.equals("Not Exist") && ongoingTable.equals("Not Exist")) {
             waitingService.insert(userId);
+            return "Entry";
         }
+
+        return "Blocked";
+
     }
 }
