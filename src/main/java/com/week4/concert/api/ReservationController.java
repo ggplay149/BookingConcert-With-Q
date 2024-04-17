@@ -17,12 +17,12 @@ public class ReservationController {
     private final ReservationUseCase reservationUseCase;
 
 
-    @Operation(summary = "해당날짜/해당공연의 잔여좌석 조회", description = "Parameter example) concert_date : 20241112, concert_title : MuseConcert")
+    @Operation(summary = "해당날짜/해당공연의 잔여좌석 조회", description = "Parameter example) date : 20241112, title : MuseConcert")
     @GetMapping("/{userId}/availableSeat")
     public ResponseEntity<ReservationResponse> findAvailableSeat(
             @PathVariable Long userId,
-            @RequestParam("concert_date") String date,
-            @RequestParam("concert_title") String title) {
+            @RequestParam("date") String date,
+            @RequestParam("title") String title) {
 
         return ResponseEntity.ok().body(
                 ReservationResponse

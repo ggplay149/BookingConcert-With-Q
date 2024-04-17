@@ -2,10 +2,7 @@ package com.week4.concert.storage.user;
 
 
 import com.week4.concert.domain.user.User;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Table(name="users")
@@ -18,14 +15,15 @@ import lombok.*;
 public class UserEntity {
 
     @Id
-    @Column(name = "id", updatable = false)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id", updatable = false)
+    private Long userId;
 
     @Column(name = "point", nullable = false)
     private Integer point;
 
     public User toUser(){
-        return new User(id,point);
+        return new User(userId,point);
     }
 
 }

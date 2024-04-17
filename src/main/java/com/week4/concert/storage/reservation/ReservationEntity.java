@@ -1,12 +1,8 @@
 package com.week4.concert.storage.reservation;
 
 import com.week4.concert.domain.reservation.Reservation;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
-
 
 @Table(name = "reservation")
 @Entity
@@ -18,8 +14,8 @@ import lombok.*;
 public class ReservationEntity {
 
     @Id
-    @Column(name = "id", updatable = false)
-    private String id;
+    @Column(name = "reservation_id", updatable = false)
+    private String reservationId;
 
     @Column(name = "reservation_date", nullable = false)
     private String reservationDate;
@@ -37,7 +33,7 @@ public class ReservationEntity {
     private String finalConfirm;
 
     public Reservation toReservation(){
-        return new Reservation(getId(),reservationDate,title,seatNum,userId,finalConfirm);
+        return new Reservation(getReservationId(),reservationDate,title,seatNum,userId,finalConfirm);
     }
 
 }
