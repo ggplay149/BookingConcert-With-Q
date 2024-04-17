@@ -11,6 +11,7 @@ package com.week4.concert.storage.queue.ongoing;
 import com.week4.concert.domain.queue.ongoing.Ongoing;
 import com.week4.concert.domain.queue.ongoing.OngoingRepository;
 import jakarta.persistence.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,14 +19,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
+@RequiredArgsConstructor
 public class OngoingCoreRepository implements OngoingRepository {
 
     private final OngoingJpaRepository ongoingJpaRepository;
-
-    public OngoingCoreRepository(OngoingJpaRepository ongoingJpaRepository) {
-        this.ongoingJpaRepository = ongoingJpaRepository;
-    }
-
 
     @Override
     public Ongoing check(Long uesrId) {

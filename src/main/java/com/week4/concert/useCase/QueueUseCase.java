@@ -3,20 +3,18 @@ package com.week4.concert.useCase;
 import com.week4.concert.domain.queue.ongoing.OngoingSerivce;
 import com.week4.concert.domain.queue.waiting.Waiting;
 import com.week4.concert.domain.queue.waiting.WaitingService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
+@RequiredArgsConstructor
 public class QueueUseCase {
 
     private final WaitingService waitingService;
     private final OngoingSerivce ongoingSerivce;
 
-    public QueueUseCase(WaitingService waitingService, OngoingSerivce ongoingSerivce) {
-        this.waitingService = waitingService;
-        this.ongoingSerivce = ongoingSerivce;
-    }
 
     public void queueUpdate() {
 
@@ -27,7 +25,9 @@ public class QueueUseCase {
             List<Waiting> nextUserList = waitingService.selectTopN(50 - ongoingCount);
 
             for (Waiting waitingUser : nextUserList) {
+
                 ongoingSerivce.insert(waitingUser.userId());
+
                 waitingService.updateDone(waitingUser.id()); // soft delete ) status => 'Done'
             }
 

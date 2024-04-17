@@ -4,19 +4,17 @@ import com.week4.concert.api.dto.QueueResponse;
 import com.week4.concert.useCase.QueueUseCase;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @Tag(name = "Queue API Controller", description = "대기열 추가/조회 제공")
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("queue")
 public class QueueController {
 
     private final QueueUseCase queueUseCase;
-
-    public QueueController(QueueUseCase queueUseCase) {
-        this.queueUseCase = queueUseCase;
-    }
 
     @Operation(summary = "대기열 추가", description = "Parameter example) userId")
     @PostMapping("/{userId}/add")
