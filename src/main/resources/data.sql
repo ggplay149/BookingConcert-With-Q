@@ -9,9 +9,6 @@ INSERT INTO reservation (reservation_id,reservation_date,title,seat_num,user_id,
 INSERT INTO reservation (reservation_id,reservation_date,title,seat_num,user_id,final_confirm) VALUES('2024111251','20241112','MuseConcert',1,2,'Y');
 INSERT INTO reservation (reservation_id,reservation_date,title,seat_num,user_id,final_confirm) VALUES('2024111257','20241112','MuseConcert',7,3,'Y');
 
---INSERT INTO Userinfo (user_point) VALUES(100000);
---INSERT INTO Userinfo (user_point) VALUES(70000);
---INSERT INTO Userinfo (user_point) VALUES(80000);
---
---
---
+INSERT INTO users (point) VALUES(100000);
+INSERT INTO users (point) VALUES(70000);
+INSERT INTO users (point) VALUES(80000);

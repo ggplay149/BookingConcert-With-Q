@@ -23,6 +23,7 @@ public interface WaitingJpaRepository extends JpaRepository<WaitingEntity, Long>
     @Query("SELECT a FROM WaitingEntity a WHERE a.status = 'Waiting' ORDER BY a.createdAt ASC")
     List<WaitingEntity> selectTopN(Pageable pageable);
 
+    @Transactional
     @Modifying
     @Query("UPDATE WaitingEntity a SET a.status = 'Done' WHERE a.id =:id")
     void updateDone(@Param("id") Long id);

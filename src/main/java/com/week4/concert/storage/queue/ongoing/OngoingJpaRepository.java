@@ -24,6 +24,7 @@ public interface OngoingJpaRepository extends JpaRepository<OngoingEntity, Long>
     @Query("SELECT a FROM OngoingEntity a WHERE a.status ='Ongoing'")
     Optional<List<OngoingEntity>> countOngoing();
 
+    @Transactional
     @Modifying
     @Query("UPDATE OngoingEntity a SET a.status = 'Done' WHERE a.id =:id")
     void updateDone(@Param("id") Long id);

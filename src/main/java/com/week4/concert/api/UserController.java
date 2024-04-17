@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@Tag(name = "Userpoint API Controller", description = "유저포인트 조회/충전 제공")
+@Tag(name = "UserPoint API Controller", description = "유저포인트 조회/충전 제공")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("user")
