@@ -1,21 +1,17 @@
 package com.week4.concert.UnitTest.api.useCase;
 
 import com.week4.concert.Fixtures;
-import com.week4.concert.api.useCase.PaymentUseCase;
+import com.week4.concert.domain.queue.ongoing.OngoingSerivce;
+import com.week4.concert.useCase.PaymentUseCase;
 import com.week4.concert.domain.concert.Concert;
 import com.week4.concert.domain.concert.ConcertService;
 import com.week4.concert.domain.payment.PaymentService;
-import com.week4.concert.domain.queue.ongoing.OngoingSerivce;
-import com.week4.concert.domain.queue.waiting.WaitingService;
 import com.week4.concert.domain.reservation.Reservation;
 import com.week4.concert.domain.reservation.ReservationService;
 import com.week4.concert.domain.user.UserService;
-import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
@@ -28,6 +24,7 @@ public class PaymentUseCaseTest {
     private ReservationService reservationService;
     private ConcertService concertService;
     private UserService userService;
+    private OngoingSerivce ongoingSerivce;
 
     private PaymentUseCase paymentUseCase;
 
@@ -37,7 +34,8 @@ public class PaymentUseCaseTest {
         reservationService = mock(ReservationService.class);
         concertService = mock(ConcertService.class);
         userService = mock(UserService.class);
-        paymentUseCase = new PaymentUseCase(paymentService,reservationService,concertService,userService);
+        ongoingSerivce = mock(OngoingSerivce.class);
+        paymentUseCase = new PaymentUseCase(paymentService,reservationService,concertService,userService,ongoingSerivce);
     }
 
     @Test

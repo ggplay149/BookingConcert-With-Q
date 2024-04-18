@@ -1,7 +1,7 @@
 package com.week4.concert.api.controller;
 
 import com.week4.concert.api.dto.ReservationResponse;
-import com.week4.concert.api.useCase.ReservationUseCase;
+import com.week4.concert.useCase.ReservationUseCase;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;

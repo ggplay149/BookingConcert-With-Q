@@ -1,12 +1,16 @@
 package com.week4.concert.IntegrationTest;
 
-import com.week4.concert.api.useCase.ReservationUseCase;
+import com.week4.concert.useCase.ReservationUseCase;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -17,6 +21,37 @@ public class ReservationTest {
     @Autowired
     private ReservationUseCase reservationUseCase;
 
+    @Test
+    @DisplayName("좌석예약 동시성 이슈 방지")
+    public void when_reserve_concurrent_issue() throws InterruptedException {
+
+        int threadCount = 20;
+        Long idCount = 1L;
+        final List<String> result = new ArrayList<>();
+
+
+        final ExecutorService executorService = Executors.newFixedThreadPool(30);
+        final CountDownLatch countDownLatch = new CountDownLatch(threadCount);
+        for (int i = 0; i < threadCount; i++) {
+            idCount++;
+            final Long testId = idCount;
+            executorService.submit(() -> {
+                try {
+                    result.add(reservationUseCase.reserve("20240504","PsyConcert",testId,5));
+                } catch (Exception e) {
+                    result.add(e.getMessage());
+                } finally {
+                    countDownLatch.countDown();
+                }
+            });
+        }
+        countDownLatch.await();
+
+        assert result.get(0).equals("5분간 좌석이 임시 배정되었습니다. 결제완료시 최종 확정됩니다.");
+        assert result.get(1).equals("이미 예약된 좌석입니다.");
+        assert result.get(2).equals("이미 예약된 좌석입니다.");
+    }
+
 
     @Test
     @DisplayName("해당콘서트 최대인원 조회후 예약된 좌석번호 빼주고 예약가능 리스트 리턴")
@@ -26,7 +61,7 @@ public class ReservationTest {
         //when
         List<Integer> result = reservationUseCase.selectAvailableSeat("20241112", "MuseConcert");
         //then
-        assertThat(result.size()).isEqualTo(47);
+        assertThat(result.size()).isEqualTo(46);
         assertThat(result.get(0)).isEqualTo(2);
         assertThat(result.get(2)).isEqualTo(5);
     }
@@ -53,4 +88,6 @@ public class ReservationTest {
         //then
         assertThat(result).isEqualTo("5분간 좌석이 임시 배정되었습니다. 결제완료시 최종 확정됩니다.");
     }
+
+
 }

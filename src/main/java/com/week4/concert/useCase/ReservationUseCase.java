@@ -1,4 +1,4 @@
-package com.week4.concert.api.useCase;
+package com.week4.concert.useCase;
 
 import com.week4.concert.domain.concert.ConcertService;
 import com.week4.concert.domain.reservation.ReservationService;

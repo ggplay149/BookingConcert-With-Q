@@ -1,6 +1,6 @@
 package com.week4.concert.scheduler;
 
-import com.week4.concert.api.useCase.QueueUseCase;
+import com.week4.concert.useCase.QueueUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;

@@ -1,7 +1,8 @@
-package com.week4.concert.api.useCase;
+package com.week4.concert.useCase;
 
 import com.week4.concert.domain.concert.ConcertService;
 import com.week4.concert.domain.payment.PaymentService;
+import com.week4.concert.domain.queue.ongoing.OngoingSerivce;
 import com.week4.concert.domain.reservation.Reservation;
 import com.week4.concert.domain.reservation.ReservationService;
 import com.week4.concert.domain.user.UserService;
@@ -16,6 +17,7 @@ public class PaymentUseCase {
     private final ReservationService reservationService;
     private final ConcertService concertService;
     private final UserService userService;
+    private final OngoingSerivce ongoingSerivce;
 
     public String pay(String reservationNumber, Long userId) {
 
@@ -28,6 +30,8 @@ public class PaymentUseCase {
         paymentService.pay(reservationNumber, userId);
 
         reservationService.finalConfirm(reservationNumber);
+
+        ongoingSerivce.updateDone(userId);
 
         return "정상 결제되었습니다. 예약이 확정되었습니다.";
     }
