@@ -17,7 +17,7 @@ public interface ReservationJpaRepository extends JpaRepository<ReservationEntit
     @Transactional
     @Modifying
     @Query("DELETE FROM ReservationEntity a " +
-            "WHERE TIMESTAMPDIFF(MINUTE, CURRENT_TIMESTAMP ,a.createdAt) >= 1" +
-            "AND a.finalConfirm = 'N'")
+            "WHERE TIMESTAMPDIFF(MINUTE, a.createdAt, CURRENT_TIMESTAMP) >= 1" +
+            "AND lower(a.finalConfirm) = 'n'")
     void cancelNotConfirmReservation();
 }
