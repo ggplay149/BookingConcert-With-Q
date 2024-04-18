@@ -16,7 +16,7 @@ public class UserController {
 
     private final UserService userService;
 
-    @Operation(summary = "유저포인트 조회", description = "Parameter example) userId")
+    @Operation(summary = "유저포인트 조회", description = "Parameter example) userId : 1~4")
     @GetMapping("/{userId}/getPoint")
     public ResponseEntity<UserResponse> getPoint(@PathVariable Long userId) {
 
