@@ -1,4 +1,4 @@
-package com.week4.concert.useCase;
+package com.week4.concert.api.useCase;
 
 import com.week4.concert.domain.concert.ConcertService;
 import com.week4.concert.domain.reservation.ReservationService;
@@ -21,5 +21,16 @@ public class ReservationUseCase {
         List<Integer> availableSeat = reservationService.availableSeat(date, title, capactiy);
 
         return availableSeat;
+    }
+
+
+    public String reserve(String date, String title, Long userId, Integer seatNum) {
+
+        Long concertId = concertService.getConcertInfo(date, title).id();
+
+        reservationService.reserve(date, concertId, title, userId, seatNum);
+
+        return "5분간 좌석이 임시 배정되었습니다. 결제완료시 최종 확정됩니다.";
+
     }
 }

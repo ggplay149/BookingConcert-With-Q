@@ -1,11 +1,9 @@
-package com.week4.concert.UnitTest.useCase;
+package com.week4.concert.UnitTest.api.useCase;
 
-import com.week4.concert.domain.concert.ConcertService;
 import com.week4.concert.domain.queue.ongoing.OngoingSerivce;
 import com.week4.concert.domain.queue.waiting.Waiting;
 import com.week4.concert.domain.queue.waiting.WaitingService;
-import com.week4.concert.domain.reservation.ReservationService;
-import com.week4.concert.useCase.QueueUseCase;
+import com.week4.concert.api.useCase.QueueUseCase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

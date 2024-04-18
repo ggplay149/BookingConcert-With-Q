@@ -1,4 +1,4 @@
-package com.week4.concert.useCase;
+package com.week4.concert.api.useCase;
 
 import com.week4.concert.domain.queue.ongoing.OngoingSerivce;
 import com.week4.concert.domain.queue.waiting.Waiting;

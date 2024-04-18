@@ -29,10 +29,10 @@ public class ReservationReaderTest {
     @DisplayName("예약된 좌석 리스트 출력")
     void reservedSeat() {
         //given
-        List<Integer> result = Fixtures.reservedList("아이유콘서트");
-        given(reservationReader.reservedSeat(any(),any())).willReturn(result);
+        List<Integer> testList = Fixtures.reservedList("아이유콘서트");
+        given(reservationRepository.selectReservedSeat(any(),any())).willReturn(testList);
         //when
-
+        List<Integer> result =reservationReader.reservedSeat(any(),any());
         //then
         assertThat(result.get(0)).isEqualTo(1);
         assertThat(result.get(9)).isEqualTo(10);

@@ -19,4 +19,19 @@ public class ReservationCoreRepository implements ReservationRepository {
                 .filter(list -> !list.isEmpty())
                 .orElseThrow(()-> new EntityNotFoundException("전석 예약 가능합니다."));
     }
+
+    @Override
+    public void reserve(ReservationEntity reservation) {
+        try {
+            reservationJpaRepository.save(reservation);
+        }catch (Exception e){
+            throw new RuntimeException("이미 예약된 좌석입니다.");
+        }
+    }
+
+    @Override
+    public void cancelNotConfirmReservation() {
+        reservationJpaRepository.cancelNotConfirmReservation();
+    }
 }
+

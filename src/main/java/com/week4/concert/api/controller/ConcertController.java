@@ -1,4 +1,4 @@
-package com.week4.concert.api;
+package com.week4.concert.api.controller;
 
 import com.week4.concert.api.dto.ConcertResponse;
 import com.week4.concert.domain.concert.ConcertService;

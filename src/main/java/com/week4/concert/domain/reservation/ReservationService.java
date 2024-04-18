@@ -1,5 +1,6 @@
 package com.week4.concert.domain.reservation;
 
+import com.week4.concert.storage.reservation.ReservationEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,15 +12,16 @@ import java.util.List;
 public class ReservationService {
 
     private final ReservationReader reservationReader;
+    private final ReservationAppender reservationAppender;
 
-    public List<Integer> reservedSeat(String date, String title){
-        return reservationReader.reservedSeat(date,title);
+    public List<Integer> reservedSeat(String date, String title) {
+        return reservationReader.reservedSeat(date, title);
     }
 
-    public List<Integer> availableSeat(String date, String title, Integer capacity){
 
-        List<Integer> reserved = reservedSeat(date,title);
+    public List<Integer> availableSeat(String date, String title, Integer capacity) {
 
+        List<Integer> reserved = reservedSeat(date, title);
         List<Integer> availableSeat = new ArrayList<>();
         for (int i = 1; i <= capacity; i++) availableSeat.add(i);
 
@@ -28,7 +30,18 @@ public class ReservationService {
             int temp = availableSeat.indexOf(reserved.get(i));
             availableSeat.remove(temp);
         }
-
         return availableSeat;
+    }
+
+    public void reserve(String concertDate, Long concertId, String concertTitle, Long userId, Integer seatNum) {
+        reservationAppender.reserve(ReservationEntity
+                .builder()
+                .reservationNumber(concertDate + concertId + seatNum)
+                .seatNum(seatNum)
+                .userId(userId)
+                .title(concertTitle)
+                .reservationDate(concertDate)
+                .finalConfirm("N")
+                .build());
     }
 }
