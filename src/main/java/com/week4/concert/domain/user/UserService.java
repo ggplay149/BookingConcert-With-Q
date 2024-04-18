@@ -16,4 +16,9 @@ public class UserService {
         Integer currentPoint = getPoint(userId);
         userPointCharger.chargePoint(userId, currentPoint+point);
     }
+
+    public void checkPoint(Integer concertPrice,Long userId){
+        if(getPoint(userId)-concertPrice < 0 )
+            throw new RuntimeException("잔액이 부족합니다.");
+    }
 }

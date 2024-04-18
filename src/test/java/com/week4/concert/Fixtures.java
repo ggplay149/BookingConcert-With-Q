@@ -59,4 +59,11 @@ public class Fixtures {
         }
         return null;
     }
+
+    public static Reservation reservation(String name){
+        if(name.equals("아이유콘서트")){
+            return new Reservation(15L,"2024050325","20240503","아이유콘서트",5,24L,"N");
+        }
+        return null;
+    }
 }

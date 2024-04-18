@@ -1,5 +1,6 @@
 package com.week4.concert.storage.reservation;
 
+import com.week4.concert.domain.reservation.Reservation;
 import com.week4.concert.domain.reservation.ReservationRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -15,16 +16,16 @@ public class ReservationCoreRepository implements ReservationRepository {
 
     @Override
     public List<Integer> selectReservedSeat(String date, String title) {
-        return reservationJpaRepository.selectReservedSeat(date,title)
+        return reservationJpaRepository.selectReservedSeat(date, title)
                 .filter(list -> !list.isEmpty())
-                .orElseThrow(()-> new EntityNotFoundException("전석 예약 가능합니다."));
+                .orElseThrow(() -> new EntityNotFoundException("전석 예약 가능합니다."));
     }
 
     @Override
     public void reserve(ReservationEntity reservation) {
         try {
             reservationJpaRepository.save(reservation);
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new RuntimeException("이미 예약된 좌석입니다.");
         }
     }
@@ -32,6 +33,18 @@ public class ReservationCoreRepository implements ReservationRepository {
     @Override
     public void cancelNotConfirmReservation() {
         reservationJpaRepository.cancelNotConfirmReservation();
+    }
+
+    @Override
+    public Reservation validReservationNumber(String reservationNumber) {
+        return reservationJpaRepository.validReservationNumber(reservationNumber)
+                .orElseThrow(() -> new EntityNotFoundException("취소되었거나 존재하지 않는 예약내역입니다."))
+                .toReservation();
+    }
+
+    @Override
+    public void finalConfirm(String reservationNumber) {
+        reservationJpaRepository.finalConfirm(reservationNumber);
     }
 }
 

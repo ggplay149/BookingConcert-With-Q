@@ -12,4 +12,6 @@ public class ReservationAppender {
 
     public void reserve (ReservationEntity reservation) { reservationRepository.reserve(reservation); }
 
+    public void finalConfirm(String reservationNumber) { reservationRepository.finalConfirm(reservationNumber);}
+
 }

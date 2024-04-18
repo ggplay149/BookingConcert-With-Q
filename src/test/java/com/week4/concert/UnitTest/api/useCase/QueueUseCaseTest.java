@@ -43,8 +43,6 @@ public class QueueUseCaseTest {
         //when
         queueUseCase.queueUpdate();
         //then
-
-
     }
 
 }

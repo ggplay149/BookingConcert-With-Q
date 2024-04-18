@@ -44,4 +44,10 @@ public class ReservationService {
                 .finalConfirm("N")
                 .build());
     }
+
+    public Reservation validReservationNumber(String reservationNumber){
+        return reservationReader.validReservationNumber(reservationNumber);
+    }
+
+    public void finalConfirm(String reservationNumber) { reservationAppender.finalConfirm(reservationNumber);}
 }
