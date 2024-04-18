@@ -14,7 +14,7 @@
 - 주요 포인트 : 대기열 시스템 구현, 모든 콘서트 좌석 테이블 통합, 예약시 동시성 제어<br>
 
 - Sequence diagram :  [https://github.com/ggplay149/3rdWeek_Concert_Reservation_Server/blob/main/src/main/resources/md/SequenceDiagram.md](https://github.com/ggplay149/4thWeek_ReservationSystem/blob/main/src/main/resources/doc/SequenceDiagram.md)
-- 
+  
 - ERD : [https://github.com/ggplay149/3rdWeek_Concert_Reservation_Server/blob/main/src/main/resources/md/ERD.md](https://github.com/ggplay149/4thWeek_ReservationSystem/blob/main/src/main/resources/doc/ERD.md)
   
   <br></br>
