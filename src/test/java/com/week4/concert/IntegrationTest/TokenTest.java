@@ -10,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -25,6 +26,7 @@ public class TokenTest {
     private OngoingSerivce ongoingSerivce;
 
     @Test
+    @Transactional
     @DisplayName("도메인 관련 api 호출시 토큰 검증, waiting이면 에러")
     public void when_fail_token_check_then_error() throws Exception {
         //given
@@ -42,6 +44,7 @@ public class TokenTest {
     }
 
     @Test
+    @Transactional
     @DisplayName("도메인 관련 api 호출시 토큰 검증, Ongoing 이면 성공")
     public void when_success_token_check_then_status_200() throws Exception {
         //given

@@ -14,7 +14,7 @@ import java.util.Optional;
 
 public interface WaitingJpaRepository extends JpaRepository<WaitingEntity, Long> {
 
-    @Transactional
+   // @Transactional
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     @Query("SELECT a FROM WaitingEntity a WHERE a.status = 'Waiting' AND a.userId =:userId")
     Optional<WaitingEntity> check(@Param("userId") Long uesrId);
@@ -23,7 +23,7 @@ public interface WaitingJpaRepository extends JpaRepository<WaitingEntity, Long>
     @Query("SELECT a FROM WaitingEntity a WHERE a.status = 'Waiting' ORDER BY a.createdAt ASC")
     List<WaitingEntity> selectTopN(Pageable pageable);
 
-    @Transactional
+   // @Transactional
     @Modifying
     @Query("UPDATE WaitingEntity a SET a.status = 'Done' WHERE a.id =:id")
     void updateDone(@Param("id") Long id);

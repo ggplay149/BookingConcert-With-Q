@@ -4,6 +4,7 @@ import com.week4.concert.domain.concert.ConcertService;
 import com.week4.concert.domain.reservation.ReservationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -14,6 +15,7 @@ public class ReservationUseCase {
     private final ConcertService concertService;
     private final ReservationService reservationService;
 
+    @Transactional(readOnly = true)
     public List<Integer> selectAvailableSeat(String date, String title) {
 
         Integer capactiy = concertService.getConcertInfo(date, title).capacity();
@@ -24,6 +26,7 @@ public class ReservationUseCase {
     }
 
 
+    @Transactional
     public String reserve(String date, String title, Long userId, Integer seatNum) {
 
         Long concertId = concertService.getConcertInfo(date, title).id();

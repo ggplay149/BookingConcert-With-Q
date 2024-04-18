@@ -7,6 +7,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -22,6 +23,7 @@ public class QueueTest {
 
 
     @Test
+    @Transactional
     @DisplayName("Ongoing 48명일 때 waiting 테이블 최우선 2명추가 / 이후 추가된 2명 waiting 테이블에서 soft delete(done) 처리 확인")
     void queueUpdate() {
 

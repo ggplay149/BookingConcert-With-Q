@@ -15,7 +15,7 @@ public interface ReservationJpaRepository extends JpaRepository<ReservationEntit
     @Query("SELECT a.seatNum FROM ReservationEntity a WHERE a.reservationDate=:date AND a.title=:title")
     Optional<List<Integer>> selectReservedSeat(@Param("date")String date, @Param("title")String title);
 
-    @Transactional
+    //@Transactional
     @Modifying
     @Query("DELETE FROM ReservationEntity a " +
             "WHERE TIMESTAMPDIFF(MINUTE, a.createdAt, CURRENT_TIMESTAMP) >= 5" +
@@ -25,7 +25,7 @@ public interface ReservationJpaRepository extends JpaRepository<ReservationEntit
     @Query("SELECT a FROM ReservationEntity a WHERE a.reservationNumber=:reservationNumber")
     Optional<ReservationEntity> validReservationNumber(@Param("reservationNumber")String reservationNumber);
 
-    @Transactional
+    //@Transactional
     @Modifying
     @Query("UPDATE ReservationEntity a SET a.finalConfirm = 'Y' WHERE a.reservationNumber =:reservationNumber")
     void finalConfirm(@Param("reservationNumber")String reservationNumber);
