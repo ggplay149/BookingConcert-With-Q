@@ -29,8 +29,11 @@ public class WaitingEntity {
     @CreationTimestamp
     private LocalDateTime createdAt;
 
+    @Column(name = "status" ,nullable = false)
+    private String status;
+
     public Waiting toWaiting(){
-        return new Waiting(getId(),userId,createdAt);
+        return new Waiting(getId(),userId,createdAt,status);
     }
 
 }

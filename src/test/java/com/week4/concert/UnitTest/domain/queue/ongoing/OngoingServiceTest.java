@@ -64,7 +64,7 @@ public class OngoingServiceTest {
         //given
         Long userId = 1000L;
         //when
-        ongoingSerivce.remove(userId);
+        ongoingSerivce.updateDone(userId);
         //then
     }
 }

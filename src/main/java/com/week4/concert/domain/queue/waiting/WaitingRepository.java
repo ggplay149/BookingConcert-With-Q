@@ -6,7 +6,9 @@ public interface WaitingRepository {
 
     void save(Long userId);
 
-    void deleteById(Long userId);
+    void updateDone(Long id);
 
     List<Waiting> selectTopN(int topN);
+
+    Waiting check(Long userId);
 }

@@ -8,45 +8,52 @@
  */
 package com.week4.concert.storage.queue.waiting;
 
-import com.week4.concert.domain.queue.ongoing.OngoingRepository;
 import com.week4.concert.domain.queue.waiting.Waiting;
 import com.week4.concert.domain.queue.waiting.WaitingRepository;
-import com.week4.concert.storage.queue.ongoing.OngoingEntity;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.persistence.PersistenceContext;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Repository
+@RequiredArgsConstructor
 public class WaitingCoreRepository implements WaitingRepository {
 
     private final WaitingJpaRepository waitingJpaRepository;
 
-    public WaitingCoreRepository(WaitingJpaRepository waitingJpaRepository) {
-        this.waitingJpaRepository = waitingJpaRepository;
-    }
-
     @Override
     public List<Waiting> selectTopN(int topN) {
-
         List<WaitingEntity> result = waitingJpaRepository.selectTopN(PageRequest.of(0, topN));
         List<Waiting> listToWaiting = new ArrayList<>();
-
-        for(WaitingEntity entity : result) listToWaiting.add(entity.toWaiting());
-
+        for (WaitingEntity entity : result) listToWaiting.add(entity.toWaiting());
         return listToWaiting;
     }
 
     @Override
-    public void save(Long userId) {
-        waitingJpaRepository.save(WaitingEntity.builder().userId(userId).build());
+    public Waiting check(Long userId) {
+        return waitingJpaRepository.check(userId)
+                .orElseThrow(() -> new EntityNotFoundException("유저가 조회되지 않습니다."))
+                .toWaiting();
     }
 
     @Override
-    public void deleteById(Long userId) {
-        waitingJpaRepository.deleteById(userId);
+    @Transactional
+    public void save(Long userId) {
+        waitingJpaRepository.save(WaitingEntity.builder()
+                .userId(userId)
+                .status("Waiting")
+                .build());
     }
 
-
+    @Override
+    @Transactional
+    public void updateDone(Long id) {
+        waitingJpaRepository.updateDone(id);
+    }
 }

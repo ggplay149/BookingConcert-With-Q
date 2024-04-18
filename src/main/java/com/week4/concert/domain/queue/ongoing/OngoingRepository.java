@@ -8,7 +8,7 @@ public interface OngoingRepository {
 
     void save(Long userId);
 
-    void deleteById(Long userId);
+    void updateDone(Long userId);
 
 
 

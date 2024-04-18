@@ -36,12 +36,12 @@ public class OngoingCoreRepositoryTest {
     }
 
     @Test
-    @DisplayName("Ongoing remove 성공")
+    @DisplayName("Ongoing updateDone 성공")
     void Success_Ongoing_remove() {
         //given
         Long userId = 1000L;
         //when
-        ongoingCoreRepository.deleteById(userId);
+        ongoingCoreRepository.updateDone(userId);
         //then
     }
 
@@ -50,7 +50,7 @@ public class OngoingCoreRepositoryTest {
     void when_not_found_user_in_ongoing_then_error() {
         //given
         Long userId = 1000L;
-        given(ongoingJpaRepository.findByUserId(userId)).willReturn(Optional.empty());
+        given(ongoingJpaRepository.check(userId)).willReturn(Optional.empty());
         //when
         Exception result = assertThrows(EntityNotFoundException.class, () -> ongoingCoreRepository.check(userId));
         //then
@@ -61,10 +61,10 @@ public class OngoingCoreRepositoryTest {
     @DisplayName("Ongoing 유저수 조회")
     void success_Ongoing_count() {
         //given
-        given(ongoingJpaRepository.countOngoing()).willReturn(5);
+        given(ongoingJpaRepository.countOngoing()).willReturn(Optional.empty());
         //when
         Integer result = ongoingCoreRepository.countOngoing();
         //then
-        assertThat(result).isEqualTo(5);
+        assertThat(result).isEqualTo(0);
     }
 }

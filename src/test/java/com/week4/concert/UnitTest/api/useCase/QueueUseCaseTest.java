@@ -1,11 +1,9 @@
-package com.week4.concert.UnitTest.useCase;
+package com.week4.concert.UnitTest.api.useCase;
 
-import com.week4.concert.domain.concert.ConcertService;
 import com.week4.concert.domain.queue.ongoing.OngoingSerivce;
 import com.week4.concert.domain.queue.waiting.Waiting;
 import com.week4.concert.domain.queue.waiting.WaitingService;
-import com.week4.concert.domain.reservation.ReservationService;
-import com.week4.concert.useCase.QueueUseCase;
+import com.week4.concert.api.useCase.QueueUseCase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -38,15 +36,13 @@ public class QueueUseCaseTest {
         given(ongoingSerivce.countOngoing()).willReturn(48);
 
         List<Waiting> testWaitingList = new ArrayList<>();
-        testWaitingList.add(new Waiting(1L,1l, LocalDateTime.now()));
-        testWaitingList.add(new Waiting(2L,2l, LocalDateTime.now()));
+        testWaitingList.add(new Waiting(1L,1l, LocalDateTime.now(),"waiting"));
+        testWaitingList.add(new Waiting(2L,2l, LocalDateTime.now(),"waiting"));
         given(waitingService.selectTopN(50-48)).willReturn(testWaitingList);
 
         //when
         queueUseCase.queueUpdate();
         //then
-
-
     }
 
 }

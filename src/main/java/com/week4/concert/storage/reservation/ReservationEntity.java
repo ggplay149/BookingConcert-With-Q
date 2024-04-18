@@ -1,12 +1,11 @@
 package com.week4.concert.storage.reservation;
 
 import com.week4.concert.domain.reservation.Reservation;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
+import java.time.LocalDateTime;
 
 @Table(name = "reservation")
 @Entity
@@ -18,8 +17,12 @@ import lombok.*;
 public class ReservationEntity {
 
     @Id
-    @Column(name = "id", updatable = false)
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "reservation_id", updatable = false)
+    private Long id;
+
+    @Column(name = "reservationNumber", updatable = false, unique = true ,nullable = false)
+    private String reservationNumber;
 
     @Column(name = "reservation_date", nullable = false)
     private String reservationDate;
@@ -36,8 +39,12 @@ public class ReservationEntity {
     @Column(name = "final_confirm", nullable = false)
     private String finalConfirm;
 
+    @Column(name = "created_at")
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+
     public Reservation toReservation(){
-        return new Reservation(getId(),reservationDate,title,seatNum,userId,finalConfirm);
+        return new Reservation(getId(),reservationNumber,reservationDate,title,seatNum,userId,finalConfirm);
     }
 
 }

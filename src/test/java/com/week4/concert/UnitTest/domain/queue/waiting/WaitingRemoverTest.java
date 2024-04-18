@@ -20,12 +20,12 @@ public class WaitingRemoverTest {
     }
 
     @Test
-    @DisplayName("Waiting Appender remvoe 성공")
+    @DisplayName("Waiting Appender updateDone 성공")
     void save() {
         //given
         Long userId = 1000L;
         //when
-        waitingRemover.remove(userId);
+        waitingRemover.updateDone(userId);
         //then
     }
 }

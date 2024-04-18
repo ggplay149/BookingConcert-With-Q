@@ -1,6 +1,7 @@
 package com.week4.concert.UnitTest.storage.reservation;
 
 import com.week4.concert.storage.reservation.ReservationCoreRepository;
+import com.week4.concert.storage.reservation.ReservationEntity;
 import com.week4.concert.storage.reservation.ReservationJpaRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,6 +12,7 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 
@@ -27,6 +29,7 @@ public class ReservationCoreRepositoryTest {
 
     String concertDate = "20230101";
     String concertTitle = "없는콘서트";
+    Integer seatNum = 12;
 
     @Test
     @DisplayName("날짜와 제목으로 조회했을 때, 예약된 좌석 없음")
@@ -39,4 +42,12 @@ public class ReservationCoreRepositoryTest {
         assertThat(e.getMessage()).isEqualTo("전석 예약 가능합니다.");
     }
 
+    @Test
+    @DisplayName("좌석예약 성공")
+    void success_reservation() {
+        //given
+        // when
+        reservationJpaRepository.save(any());
+        //then
+    }
 }

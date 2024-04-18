@@ -1,18 +1,16 @@
 package com.week4.concert.domain.concert;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class ConcertService {
 
     private final ConcertReader concertReader;
-
-    public ConcertService(ConcertReader concertReader) {
-        this.concertReader = concertReader;
-    }
 
     public Concert getConcertInfo(String date, String title){
         return concertReader.getConcertInfo(date,title);

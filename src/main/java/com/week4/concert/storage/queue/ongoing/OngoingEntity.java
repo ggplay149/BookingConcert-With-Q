@@ -28,8 +28,11 @@ public class OngoingEntity {
     @CreationTimestamp
     private LocalDateTime createdAt;
 
+    @Column(name = "status" ,nullable = false)
+    private String status;
+
     public Ongoing toOngoing(){
-        return new Ongoing(getId(),userId,createdAt);
+        return new Ongoing(getId(),userId,createdAt,status);
     }
 
 }
