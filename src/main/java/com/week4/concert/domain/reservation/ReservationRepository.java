@@ -1,6 +1,6 @@
 package com.week4.concert.domain.reservation;
 
-import com.week4.concert.storage.reservation.ReservationEntity;
+import com.week4.concert.infrastructure.reservation.ReservationEntity;
 
 import java.util.List;
 

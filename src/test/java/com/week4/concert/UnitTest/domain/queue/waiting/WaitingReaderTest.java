@@ -1,21 +1,16 @@
 package com.week4.concert.UnitTest.domain.queue.waiting;
 
 import com.week4.concert.Fixtures;
-import com.week4.concert.domain.queue.ongoing.Ongoing;
 import com.week4.concert.domain.queue.waiting.Waiting;
 import com.week4.concert.domain.queue.waiting.WaitingReader;
 import com.week4.concert.domain.queue.waiting.WaitingRepository;
-import com.week4.concert.storage.queue.waiting.WaitingEntity;
-import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.data.domain.PageRequest;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;

@@ -2,8 +2,6 @@ package com.week4.concert.UnitTest.domain.payment;
 
 import com.week4.concert.domain.payment.PaymentAppender;
 import com.week4.concert.domain.payment.PaymentRepository;
-import com.week4.concert.storage.payment.PaymentCoreRepository;
-import com.week4.concert.storage.payment.PaymentJpaRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
