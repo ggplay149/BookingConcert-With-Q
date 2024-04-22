@@ -7,19 +7,29 @@ TDD를 기반으로한 콘서트 예약 시스템 입니다.<br><br>
 
 <details>
 <summary>API 설계</summary>  
+ <br>
    
 - ERD : [https://github.com/ggplay149/3rdWeek_Concert_Reservation_Server/blob/main/src/main/resources/md/ERD.md](https://github.com/ggplay149/4thWeek_ReservationSystem/blob/main/src/main/resources/doc/ERD.md)
      
-- Sequence diagram :  [https://github.com/ggplay149/3rdWeek_Concert_Reservation_Server/blob/main/src/main/resources/md/SequenceDiagram.md](https://github.com/ggplay149/4thWeek_ReservationSystem/blob/main/src/main/resources/doc/SequenceDiagram.md)  
+- Sequence diagram :  [https://github.com/ggplay149/3rdWeek_Concert_Reservation_Server/blob/main/src/main/resources/md/SequenceDiagram.md](https://github.com/ggplay149/4thWeek_ReservationSystem/blob/main/src/main/resources/doc/SequenceDiagram.md)
+
+ <br>
  
 </details>
 
 <details>
 <summary>Git branch 전략</summary>
 
-- dev
-- stg
-- prd
+   <br>
+
+
+- dev : 신규 기능 개발 및 수정이 진행되는 개발
+  
+- stg : dev환경에서 개발된 신규기능과 개선사항을 실제 서비스와 유사한 환경에서 테스트.
+  
+- prd : 서비스 실제 유저에게 제공
+
+  <br>
  
 </details>
 
