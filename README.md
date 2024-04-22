@@ -9,8 +9,7 @@ TDD를 기반으로한 콘서트 예약 시스템 입니다.<br><br>
 <summary>API 설계</summary>  
  <br>
    
-- ERD : [https://github.com/ggplay149/3rdWeek_Concert_Reservation_Server/blob/main/src/main/resources/md/ERD.md](https://github.com/ggplay149/4thWeek_ReservationSystem/blob/main/src/main/resources/doc/ERD.md)
-     
+- ERD : https://github.com/ggplay149/ConcertBookingServer/blob/main/src/main/resources/doc/ERD.md
 - Sequence diagram :  [https://github.com/ggplay149/3rdWeek_Concert_Reservation_Server/blob/main/src/main/resources/md/SequenceDiagram.md](https://github.com/ggplay149/4thWeek_ReservationSystem/blob/main/src/main/resources/doc/SequenceDiagram.md)
 
  <br>
