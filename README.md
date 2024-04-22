@@ -12,6 +12,7 @@ TDD를 기반으로한 콘서트 예약 시스템 입니다.<br><br>
  <br>
    
 - ERD : https://github.com/ggplay149/ConcertBookingServer/blob/main/src/main/resources/doc/ERD.md
+  
 - Sequence diagram : https://github.com/ggplay149/ConcertBookingServer/blob/main/src/main/resources/doc/SequenceDiagram.md
 
  <br>
