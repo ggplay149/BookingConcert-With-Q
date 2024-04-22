@@ -2,6 +2,7 @@ package com.week4.concert.domain.concert;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,9 +13,11 @@ public class ConcertService {
 
     private final ConcertReader concertReader;
 
+
     public Concert getConcertInfo(String date, String title){
         return concertReader.getConcertInfo(date,title);
     }
+
 
     public List<String> showAvailableConcertList() {
         List<String> list = new ArrayList<>();

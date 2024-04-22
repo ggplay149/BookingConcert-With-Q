@@ -11,8 +11,8 @@ public class TokenScheduler {
 
     private final QueueUseCase queueUseCase;
 
-    @Scheduled(fixedRate = 10000)
-    public void tokenUpdate(){
-        queueUseCase.queueUpdate();
-    }
+//    @Scheduled(fixedRate = 10000)
+//    public void tokenUpdate(){
+//        queueUseCase.queueUpdate();
+//    }
 }

@@ -1,7 +1,12 @@
-FROM openjdk:21-jdk
-CMD ["./gradlew", "clean", "build"]
-VOLUME /tmp
-ARG JAR_FILE=build/libs/*.jar
-COPY ${JAR_FILE} app.jar
+FROM openjdk:17-alpine
+COPY build/libs/*.jar app.jar
+
 EXPOSE 8080
-ENTRYPOINT ["java","-jar","/app.jar"]
+
+ENTRYPOINT ["java", "-Dspring.profiles.active=dev", "-jar", "/app.jar"]
+
+#image 생성
+#docker build —platform linux/x86_64 -t concert-img .
+
+#container 실행
+#docker run —rm —name concert -p 8080:8080 -e PROFILE=dev concert-img
