@@ -11,7 +11,6 @@ public interface ConcertJpaRepository extends JpaRepository<ConcertEntity, Long>
 
     Optional<ConcertEntity> findByDateAndTitle(String date, String title);
 
-    @Transactional(readOnly = true)
     @Query("SELECT a FROM ConcertEntity a WHERE a.reservedCount < a.capacity")
     Optional<List<ConcertEntity>> findAvailableConcertAndDate();
 

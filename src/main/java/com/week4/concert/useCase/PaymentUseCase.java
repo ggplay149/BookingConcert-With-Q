@@ -20,7 +20,6 @@ public class PaymentUseCase {
     private final UserService userService;
     private final OngoingSerivce ongoingSerivce;
 
-    @Transactional
     public String pay(String reservationNumber, Long userId) {
 
         Reservation validReservation = reservationService.validReservationNumber(reservationNumber);
