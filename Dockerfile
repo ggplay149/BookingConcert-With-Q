@@ -4,7 +4,7 @@ EXPOSE 8080
 ENTRYPOINT ["java", "-Dspring.profiles.active=dev", "-jar", "/app.jar"]
 
 #image 생성
-#docker build —platform linux/x86_64 -t concert-img .
+#docker build -t concert-img .
 
 #container 실행
-#docker run —rm —name concert -p 8080:8080 -e PROFILE=dev concert-img
+#docker run --rm --name concert -p 8080:8080 -e PROFILE=dev concert-img
