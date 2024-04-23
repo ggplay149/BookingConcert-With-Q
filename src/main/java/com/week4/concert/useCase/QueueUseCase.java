@@ -16,7 +16,6 @@ public class QueueUseCase {
     private final WaitingService waitingService;
     private final OngoingSerivce ongoingSerivce;
 
-
     @Transactional
     public void queueUpdate() {
 
