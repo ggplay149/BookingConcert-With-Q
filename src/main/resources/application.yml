@@ -1,7 +1,4 @@
 spring:
-  profiles:
-    default: dev
-
   application:
     name: concert
 
