@@ -14,7 +14,7 @@ public class SwaggerConfig {
     public OpenAPI openAPI() {
         Info info = new Info()
                 .title("콘서트 예약 시스템")
-                .version("v1.0.1")
+                .version("v2.0.0")
                 .description("ggplay149");
 
         return new OpenAPI()
