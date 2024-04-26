@@ -74,4 +74,4 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: '654654383536.dkr.ecr.ap-northeast-2.amazonaws.com/ggplay_concert_dev:latest'
+          tags: ${{ secrets.DEV_TAG }}
