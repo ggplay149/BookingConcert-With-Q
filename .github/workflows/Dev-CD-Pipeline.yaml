@@ -74,11 +74,4 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: 'latest'
-        env:
-          ECR_REGISTRY: ${{ steps.ecr-login.outputs.registry }}
-          IMAGE_TAG: dev-${{ github.sha }}
-          run: |
-            docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG . --target=dev
-            docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-            echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
+          tags: '654654383536.dkr.ecr.ap-northeast-2.amazonaws.com/ggplay_concert_dev:latest'
