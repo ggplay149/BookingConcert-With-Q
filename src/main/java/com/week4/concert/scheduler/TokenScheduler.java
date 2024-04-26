@@ -12,6 +12,7 @@ public class TokenScheduler {
 
     private final QueueUseCase queueUseCase;
 
+    //10초간격
     @Scheduled(fixedRate = 10000)
     public void tokenUpdate(){
         queueUseCase.queueUpdate();
