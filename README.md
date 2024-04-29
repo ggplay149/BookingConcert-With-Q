@@ -24,10 +24,9 @@ TDD를 기반으로한 콘서트 예약 시스템 입니다.<br><br>
 
    <br>
 
+Git hub Flow
 
 - dev : 신규 기능 개발 및 수정 진행
-  
-- stg : 개선된 dev api를 prd db 환경에서 테스트.
   
 - prd : 서비스 실제 유저에게 제공
 
