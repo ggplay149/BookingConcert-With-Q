@@ -2,7 +2,7 @@ package com.week4.concert.IntegrationTest;
 
 import com.week4.concert.domain.queue.ongoing.OngoingSerivce;
 import com.week4.concert.domain.queue.waiting.WaitingService;
-import com.week4.concert.useCase.QueueUseCase;
+import com.week4.concert.application.QueueUseCase;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

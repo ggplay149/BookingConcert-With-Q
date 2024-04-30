@@ -1,10 +1,9 @@
-package com.week4.concert.scheduler;
+package com.week4.concert.base.scheduler;
 
-import com.week4.concert.useCase.QueueUseCase;
+import com.week4.concert.application.QueueUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 @Component
 @RequiredArgsConstructor

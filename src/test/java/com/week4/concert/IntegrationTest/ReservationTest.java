@@ -1,6 +1,6 @@
 package com.week4.concert.IntegrationTest;
 
-import com.week4.concert.useCase.ReservationUseCase;
+import com.week4.concert.application.ReservationUseCase;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.week4.concert.api.interceptor;
+package com.week4.concert.base.interceptor;
 
 import com.week4.concert.domain.queue.ongoing.OngoingSerivce;
 import lombok.RequiredArgsConstructor;
