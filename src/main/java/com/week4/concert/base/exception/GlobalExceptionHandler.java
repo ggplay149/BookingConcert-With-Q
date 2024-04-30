@@ -1,4 +1,4 @@
-package com.week4.concert.api.exception;
+package com.week4.concert.base.exception;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;

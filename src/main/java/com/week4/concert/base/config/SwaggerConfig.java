@@ -1,4 +1,4 @@
-package com.week4.concert.config;
+package com.week4.concert.base.config;
 
 
 import io.swagger.v3.oas.models.Components;

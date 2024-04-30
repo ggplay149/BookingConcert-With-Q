@@ -2,7 +2,7 @@ package com.week4.concert.UnitTest.api.useCase;
 
 import com.week4.concert.Fixtures;
 import com.week4.concert.domain.queue.ongoing.OngoingSerivce;
-import com.week4.concert.useCase.PaymentUseCase;
+import com.week4.concert.application.PaymentUseCase;
 import com.week4.concert.domain.concert.Concert;
 import com.week4.concert.domain.concert.ConcertService;
 import com.week4.concert.domain.payment.PaymentService;

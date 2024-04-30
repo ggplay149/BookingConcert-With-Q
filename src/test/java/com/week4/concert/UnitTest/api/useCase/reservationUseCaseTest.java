@@ -4,7 +4,7 @@ import com.week4.concert.Fixtures;
 import com.week4.concert.domain.concert.Concert;
 import com.week4.concert.domain.concert.ConcertService;
 import com.week4.concert.domain.reservation.ReservationService;
-import com.week4.concert.useCase.ReservationUseCase;
+import com.week4.concert.application.ReservationUseCase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

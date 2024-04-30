@@ -1,4 +1,4 @@
-package com.week4.concert.useCase;
+package com.week4.concert.application;
 
 import com.week4.concert.domain.concert.ConcertService;
 import com.week4.concert.domain.payment.PaymentService;

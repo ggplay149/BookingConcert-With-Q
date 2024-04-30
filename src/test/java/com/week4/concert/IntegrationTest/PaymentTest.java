@@ -1,7 +1,7 @@
 package com.week4.concert.IntegrationTest;
 
 
-import com.week4.concert.useCase.PaymentUseCase;
+import com.week4.concert.application.PaymentUseCase;
 import com.week4.concert.domain.concert.ConcertService;
 import com.week4.concert.domain.payment.PaymentService;
 import com.week4.concert.domain.reservation.ReservationService;
@@ -10,11 +10,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.util.List;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 

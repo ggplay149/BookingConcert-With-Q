@@ -1,4 +1,4 @@
-package com.week4.concert.api.interceptor;
+package com.week4.concert.base.interceptor;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

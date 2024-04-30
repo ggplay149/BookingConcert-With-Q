@@ -1,4 +1,4 @@
-package com.week4.concert.scheduler;
+package com.week4.concert.base.scheduler;
 
 import com.week4.concert.domain.reservation.ReservationCanceler;
 import lombok.RequiredArgsConstructor;
