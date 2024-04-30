@@ -1,5 +1,6 @@
 package com.week4.concert.domain.user;
 
+import com.week4.concert.base.lockHandler.LockHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -9,12 +10,17 @@ public class UserService {
 
     private final UserReader userReader;
     private final UserPointCharger userPointCharger;
+    private final LockHandler lockHandler;
 
     public Integer getPoint(Long userId){ return userReader.getPoint(userId); }
 
     public void chargePoint(Long userId, Integer point){
         Integer currentPoint = getPoint(userId);
-        userPointCharger.chargePoint(userId, currentPoint+point);
+        if (lockHandler.lock(userId,10)) {
+            userPointCharger.chargePoint(userId, currentPoint+point);
+        } else {
+            throw new RuntimeException("10초내에 연속으로 충전할수 없습니다.");
+        }
     }
 
     public void checkPoint(Integer concertPrice,Long userId){
