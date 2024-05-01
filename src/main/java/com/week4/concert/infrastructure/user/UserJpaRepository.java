@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 public interface UserJpaRepository extends JpaRepository<UserEntity, Long> {
 
-    @Transactional
     @Modifying
     @Query("UPDATE UserEntity a SET a.point =:point WHERE a.userId =:id")
     void updatePoint(@Param("id") Long id, @Param("point") Integer point);

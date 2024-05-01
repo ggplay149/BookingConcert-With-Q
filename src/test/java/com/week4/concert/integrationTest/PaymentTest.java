@@ -2,6 +2,7 @@ package com.week4.concert.integrationTest;
 
 
 import com.week4.concert.application.PaymentUseCase;
+import com.week4.concert.base.lockHandler.LockHandler;
 import com.week4.concert.domain.concert.ConcertService;
 import com.week4.concert.domain.payment.PaymentService;
 import com.week4.concert.domain.reservation.ReservationService;
@@ -26,6 +27,8 @@ public class PaymentTest {
     private UserService userService;
     @Autowired
     private PaymentUseCase paymentUseCase;
+    @Autowired
+    private LockHandler lockHandler;
 
     @Test
     @DisplayName("임시배정시간 초과로 결제실패")
@@ -54,6 +57,7 @@ public class PaymentTest {
     void success_payment() {
         //given
         //when
+        lockHandler.unlock("user"+1L);
         paymentUseCase.pay("2024111259", 1L);
         //then
         assert reservationService.validReservationNumber("2024111259").finalConfirm().equals("Y");

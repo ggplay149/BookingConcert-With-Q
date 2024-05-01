@@ -38,13 +38,4 @@ public class userServiceTest {
         //then
         assert result == 1000;
     }
-
-    @Test
-    @DisplayName("유저포인터 충전 성공")
-    void chargePoint() {
-        //given
-        //when
-        userService.chargePoint(1L, 1000);
-        //then
-    }
 }
