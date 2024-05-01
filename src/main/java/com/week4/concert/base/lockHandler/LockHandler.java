@@ -15,14 +15,16 @@ public class LockHandler {
         this.redisTemplate = redisTemplate;
     }
 
-    public Boolean lock(String key,long ttl){
+    public Boolean lock(String key,String value, long ttl){
         return redisTemplate
                 .opsForValue()
-                .setIfAbsent(key,"lock", Duration.ofSeconds(ttl));
+                .setIfAbsent(key,value, Duration.ofSeconds(ttl));
     }
 
     public Boolean unlock(String key){
         return redisTemplate.delete(key);
     }
+
+    public String  getValue(String key) { return redisTemplate.opsForValue().get(key); }
 
 }

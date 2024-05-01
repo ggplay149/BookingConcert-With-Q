@@ -32,9 +32,13 @@ public class ReservationUseCase {
 
         Long concertId = concertService.getConcertInfo(date, title).id();
 
-        reservationService.reserve(date, concertId, title, userId, seatNum);
+        String reservationNumber = date+"."+concertId+"."+seatNum;
 
-        return "5분간 좌석이 임시 배정되었습니다. 결제완료시 최종 확정됩니다.";
+        reservationService.checkReservation(reservationNumber);
+
+        reservationService.reserve(reservationNumber,concertId);
+
+        return "[ 예약번호 : "+reservationNumber+" ] 5분간 좌석이 임시 배정되었습니다. 결제완료시 최종 확정됩니다.";
 
     }
 }

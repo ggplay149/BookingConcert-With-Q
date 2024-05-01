@@ -19,4 +19,6 @@ public class ConcertReader {
     public List<Concert> findAvailableConcertAndDate() {
         return concertRepository.findAvailableConcertAndDate();
     }
+
+    public Concert getConcertInfoById(Long reservedConcertId) { return concertRepository.getConcertInfoById(reservedConcertId);}
 }

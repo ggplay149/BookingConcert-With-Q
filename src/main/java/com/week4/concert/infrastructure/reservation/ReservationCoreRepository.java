@@ -46,5 +46,11 @@ public class ReservationCoreRepository implements ReservationRepository {
     public void finalConfirm(String reservationNumber) {
         reservationJpaRepository.finalConfirm(reservationNumber);
     }
+
+    @Override
+    public void checkReservation(String reservationNumber) {
+        if(reservationJpaRepository.checkReservation(reservationNumber)!= null)
+            throw new RuntimeException("예약된 좌석입니다.");
+    }
 }
 

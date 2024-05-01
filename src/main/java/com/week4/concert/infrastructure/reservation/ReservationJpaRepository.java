@@ -27,4 +27,6 @@ public interface ReservationJpaRepository extends JpaRepository<ReservationEntit
     @Query("UPDATE ReservationEntity a SET a.finalConfirm = 'Y' WHERE a.reservationNumber =:reservationNumber")
     void finalConfirm(@Param("reservationNumber")String reservationNumber);
 
+    @Query("SELECT a FROM ReservationEntity a WHERE a.reservationNumber=:reservationNumber")
+    ReservationEntity checkReservation(@Param("reservationNumber")String reservationNumber);
 }

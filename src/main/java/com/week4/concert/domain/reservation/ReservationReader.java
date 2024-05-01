@@ -18,4 +18,8 @@ public class ReservationReader {
     public Reservation validReservationNumber(String reservationNumber) {
         return reservationRepository.validReservationNumber(reservationNumber);
     }
+
+    public void checkReservation(String reservationNumber) {
+        reservationRepository.checkReservation(reservationNumber);
+    }
 }

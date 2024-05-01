@@ -17,4 +17,6 @@ public interface ReservationRepository {
     Reservation validReservationNumber(String reservationNumber);
 
     void finalConfirm(String reservationNumber);
+
+    void checkReservation(String reservationNumber);
 }

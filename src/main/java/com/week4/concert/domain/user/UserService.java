@@ -27,7 +27,7 @@ public class UserService {
     @Transactional
     public void chargePoint(Long userId, Integer point){
 
-        if (lockHandler.lock("user"+userId,3)) {
+        if (lockHandler.lock("user"+userId,"lock",3)) {
             Integer currentPoint = getPoint(userId);
             userPointCharger.chargePoint(userId, currentPoint+point);
         }
