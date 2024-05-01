@@ -33,6 +33,8 @@ public class PaymentUseCase {
 
         reservationService.finalConfirm(reservationNumber);
 
+        userService.usePoint(userId,concertPrice);
+
         ongoingSerivce.updateDone(userId);
 
         return "정상 결제되었습니다. 예약이 확정되었습니다.";
