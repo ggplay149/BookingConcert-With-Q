@@ -1,6 +1,5 @@
 package com.week4.concert.domain.user;
 
-import com.week4.concert.base.lockHandler.LockHandler;
 import lombok.RequiredArgsConstructor;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
@@ -32,11 +31,9 @@ public class UserService {
     public void chargePoint(Long userId, Integer point){
         RLock lock = redissonClient.getLock("user" + userId);
         try {
-
-            lock.tryLock(30, 10, TimeUnit.SECONDS);
+            lock.tryLock(3, 1, TimeUnit.SECONDS);
             Integer currentPoint = getPoint(userId);
             userPointCharger.chargePoint(userId, currentPoint + point);
-
 
         } catch (InterruptedException e) {
             throw new RuntimeException(e);

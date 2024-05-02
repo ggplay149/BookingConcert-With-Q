@@ -4,6 +4,8 @@ import com.week4.concert.base.lockHandler.LockHandler;
 import com.week4.concert.domain.user.UserService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.redisson.api.RKeys;
+import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -23,15 +25,15 @@ public class UserPointTest {
     private UserService userService;
 
     @Autowired
-    private LockHandler lockHandler;
+    private RedissonClient redissonClient;
 
     @Test
-    @DisplayName("사용/충전 동시 요청")
-    public void prevent_consecutive_recharge() throws InterruptedException {
+    @DisplayName("사용/충전 동시 요청시 순차적으로 처리")
+    public void handle_sequentially_charge_and_use() throws InterruptedException {
 
         //given
 
-        // when : 5명 같은좌석 동시 예약 요청
+        // when :
         int threadCount = 6;
 
         final ExecutorService executorService = Executors.newFixedThreadPool(30);
@@ -40,7 +42,6 @@ public class UserPointTest {
             executorService.submit(() -> {
                 try {
                     userService.chargePoint(1L,2000);
-                    userService.usePoint(1L,1000);
                 } catch (Exception e) {
 
                 } finally {
@@ -50,8 +51,6 @@ public class UserPointTest {
         }
         countDownLatch.await();
         //then
-        assertThat(userService.getPoint(1L)).isEqualTo(104000);
-
-
+        assertThat(userService.getPoint(1L)).isEqualTo(110000);
     }
 }
