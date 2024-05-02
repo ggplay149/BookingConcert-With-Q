@@ -26,12 +26,8 @@ public class UserService {
 
     @Transactional
     public void chargePoint(Long userId, Integer point){
-
-        if (lockHandler.lock("user"+userId,"lock",3)) {
             Integer currentPoint = getPoint(userId);
             userPointCharger.chargePoint(userId, currentPoint+point);
-        }
-        else throw new RuntimeException("3초내 연속으로 진행할수 없습니다.");
     }
 
     @Transactional

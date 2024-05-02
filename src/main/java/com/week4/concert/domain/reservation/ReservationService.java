@@ -69,7 +69,7 @@ public class ReservationService {
         }
     }
 
-    public void checkReservation(String reservationNumber) {
+    public void checkDuplicateReservation(String reservationNumber) {
         reservationReader.checkReservation(reservationNumber);
     }
 }

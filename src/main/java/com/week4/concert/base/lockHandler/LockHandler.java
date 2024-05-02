@@ -4,6 +4,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
 import java.time.Duration;
+import java.util.Set;
 
 @Component
 public class LockHandler {
@@ -27,4 +28,8 @@ public class LockHandler {
 
     public String  getValue(String key) { return redisTemplate.opsForValue().get(key); }
 
+    public void reset(){
+        Set<String> keys = redisTemplate.keys("*");
+        if (keys != null)  redisTemplate.delete(keys);
+    }
 }

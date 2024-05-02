@@ -34,7 +34,7 @@ public class ReservationUseCase {
 
         String reservationNumber = date+"."+concertId+"."+seatNum;
 
-        reservationService.checkReservation(reservationNumber);
+        reservationService.checkDuplicateReservation(reservationNumber);
 
         reservationService.reserve(reservationNumber,concertId);
 
