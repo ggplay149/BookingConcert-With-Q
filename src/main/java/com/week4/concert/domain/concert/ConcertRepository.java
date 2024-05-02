@@ -7,4 +7,6 @@ public interface ConcertRepository {
     Concert getConcertInfo(String concertDate, String concertTitle);
 
     List<Concert> findAvailableConcertAndDate();
+
+    Concert getConcertInfoById(Long reservedConcertId);
 }

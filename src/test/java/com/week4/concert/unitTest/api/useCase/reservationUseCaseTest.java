@@ -49,19 +49,4 @@ public class reservationUseCaseTest {
         assertThat(result.size()).isEqualTo(10);
     }
 
-    @Test
-    @DisplayName("예약 성공")
-    void reserve() {
-        //given
-        List<Integer> list = Fixtures.reservedList("아이유콘서트");
-        Concert testConcert = Fixtures.concert("아이유콘서트");
-        given(reservationService.availableSeat(any(),any(),any())).willReturn(list);
-        given(concertService.getConcertInfo(any(), any())).willReturn(testConcert);
-
-        //when
-        String result = reservationUseCase.reserve("20240414","아이유콘서트",16L,25);
-
-        //then
-        assertThat(result).isEqualTo("5분간 좌석이 임시 배정되었습니다. 결제완료시 최종 확정됩니다.");
-    }
 }

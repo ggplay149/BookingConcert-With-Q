@@ -30,4 +30,11 @@ public class ConcertCoreRepository implements ConcertRepository {
                 .map(ConcertEntity::toConcert)
                 .toList();
     }
+
+    @Override
+    public Concert getConcertInfoById(Long reservedConcertId) {
+        return concertJpaRepository.findById(reservedConcertId)
+                .orElseThrow(() -> new EntityNotFoundException("조회되는 콘서트가 없습니다."))
+                .toConcert();
+    }
 }

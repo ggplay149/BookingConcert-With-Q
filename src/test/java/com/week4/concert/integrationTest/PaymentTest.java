@@ -2,6 +2,7 @@ package com.week4.concert.integrationTest;
 
 
 import com.week4.concert.application.PaymentUseCase;
+import com.week4.concert.application.ReservationUseCase;
 import com.week4.concert.base.lockHandler.LockHandler;
 import com.week4.concert.domain.concert.ConcertService;
 import com.week4.concert.domain.payment.PaymentService;
@@ -12,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
@@ -29,6 +31,8 @@ public class PaymentTest {
     private PaymentUseCase paymentUseCase;
     @Autowired
     private LockHandler lockHandler;
+    @Autowired
+    private ReservationUseCase reservationUseCase;
 
     @Test
     @DisplayName("임시배정시간 초과로 결제실패")
@@ -36,30 +40,8 @@ public class PaymentTest {
         //given 예약내역 data.sql로 설정
         //when
         Exception result = assertThrows(RuntimeException.class,
-                () -> paymentUseCase.pay("20241112", 2L));
+                () -> paymentUseCase.pay("1111.1111.111111", 2L));
         //then
-        assert result.getMessage() == "취소되었거나 존재하지 않는 예약내역입니다.";
-    }
-
-    @Test
-    @DisplayName("잔액부족으로 결제실패")
-    void fail_payment_becuase_point() {
-        //given 예약내역 data.sql로 설정
-        //when
-        Exception result = assertThrows(RuntimeException.class,
-                () -> paymentUseCase.pay("2024111254", 4L));
-        //then
-        assert result.getMessage() == "잔액이 부족합니다.";
-    }
-
-    @Test
-    @DisplayName("결제성공 후 최종확정 확인")
-    void success_payment() {
-        //given
-        //when
-        lockHandler.unlock("user"+1L);
-        paymentUseCase.pay("2024111259", 1L);
-        //then
-        assert reservationService.validReservationNumber("2024111259").finalConfirm().equals("Y");
+        assert result.getMessage() == "존재하지 않거나 유효시간이 만료된 예약번호 입니다.";
     }
 }

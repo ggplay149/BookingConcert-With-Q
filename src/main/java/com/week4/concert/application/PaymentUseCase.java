@@ -1,5 +1,6 @@
 package com.week4.concert.application;
 
+import com.week4.concert.domain.concert.Concert;
 import com.week4.concert.domain.concert.ConcertService;
 import com.week4.concert.domain.payment.PaymentService;
 import com.week4.concert.domain.queue.ongoing.OngoingSerivce;
@@ -18,24 +19,21 @@ public class PaymentUseCase {
     private final ReservationService reservationService;
     private final ConcertService concertService;
     private final UserService userService;
-    private final OngoingSerivce ongoingSerivce;
 
     @Transactional
     public String pay(String reservationNumber, Long userId) {
 
-        Reservation validReservation = reservationService.validReservationNumber(reservationNumber);
+        Long reservedConcertId = reservationService.getReservedConcertId(reservationNumber);
 
-        Integer concertPrice = concertService.getConcertInfo(validReservation.reservationDate(),validReservation.title()).price();
+        Concert reservedConcert = concertService.getConcert(reservedConcertId);
 
-        userService.checkPoint(concertPrice,userId);
+        userService.checkPoint(reservedConcert.price(),userId);
 
-        paymentService.pay(reservationNumber, userId);
+        paymentService.pay(reservationNumber,userId);
 
-        reservationService.finalConfirm(reservationNumber);
+        userService.usePoint(userId,reservedConcert.price());
 
-        userService.usePoint(userId,concertPrice);
-
-        ongoingSerivce.updateDone(userId);
+        reservationService.finalConfirm(reservationNumber, reservedConcert.title(), userId);
 
         return "정상 결제되었습니다. 예약이 확정되었습니다.";
     }

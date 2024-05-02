@@ -4,10 +4,10 @@ INSERT INTO concert (title,capacity,reserved_count,price,concert_date) VALUES('O
 INSERT INTO concert (title,capacity,reserved_count,price,concert_date) VALUES('OasisConcert',50,45,50000,'20240612');
 INSERT INTO concert (title,capacity,reserved_count,price,concert_date) VALUES('MuseConcert',50,23,70000,'20241112');
 
-INSERT INTO reservation (reservation_number,reservation_date,title,seat_num,user_id,final_confirm) VALUES('2024111254','20241112','MuseConcert',4,1,'Y');
-INSERT INTO reservation (reservation_number,reservation_date,title,seat_num,user_id,final_confirm) VALUES('2024111251','20241112','MuseConcert',1,2,'Y');
-INSERT INTO reservation (reservation_number,reservation_date,title,seat_num,user_id,final_confirm) VALUES('2024111257','20241112','MuseConcert',7,3,'Y');
-INSERT INTO reservation (reservation_number,reservation_date,title,seat_num,user_id,final_confirm) VALUES('2024111259','20241112','MuseConcert',9,1,'N');
+INSERT INTO reservation (reservation_number,reservation_date,title,seat_num,user_id,final_confirm) VALUES('20241112.5.4','20241112','MuseConcert',4,1,'Y');
+INSERT INTO reservation (reservation_number,reservation_date,title,seat_num,user_id,final_confirm) VALUES('20241112.5.1','20241112','MuseConcert',1,2,'Y');
+INSERT INTO reservation (reservation_number,reservation_date,title,seat_num,user_id,final_confirm) VALUES('20241112.5.7','20241112','MuseConcert',7,3,'Y');
+INSERT INTO reservation (reservation_number,reservation_date,title,seat_num,user_id,final_confirm) VALUES('20241112.5.9','20241112','MuseConcert',9,1,'N');
 
 INSERT INTO users (point) VALUES(100000);
 INSERT INTO users (point) VALUES(70000);

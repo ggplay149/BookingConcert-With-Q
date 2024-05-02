@@ -13,6 +13,5 @@ public class PaymentCoreRepository implements PaymentRepository {
     @Override
     public void pay(PaymentEntity payment) {
         paymentJpaRepository.save(payment);
-
     }
 }

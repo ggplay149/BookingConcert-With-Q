@@ -28,4 +28,8 @@ public class ConcertService {
         }
         return list;
     }
+
+    public Concert getConcert(Long reservedConcertId) {
+        return concertReader.getConcertInfoById(reservedConcertId);
+    }
 }

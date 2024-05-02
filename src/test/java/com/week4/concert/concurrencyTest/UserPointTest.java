@@ -4,6 +4,8 @@ import com.week4.concert.base.lockHandler.LockHandler;
 import com.week4.concert.domain.user.UserService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.redisson.api.RKeys;
+import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -23,29 +25,32 @@ public class UserPointTest {
     private UserService userService;
 
     @Autowired
-    private LockHandler lockHandler;
+    private RedissonClient redissonClient;
 
     @Test
-    @DisplayName("연속충전(따닥) 방지")
-    public void prevent_consecutive_recharge() throws InterruptedException {
+    @DisplayName("사용/충전 동시 요청시 순차적으로 처리")
+    public void handle_sequentially_charge_and_use() throws InterruptedException {
 
-        lockHandler.unlock("user"+1L);
-        userService.chargePoint(1L,1000);
-        Exception result = assertThrows(RuntimeException.class,() -> userService.chargePoint(1L,1000));
-        assertThat(result.getMessage()).isEqualTo("3초내 연속으로 진행할수 없습니다.");
+        //given
 
+        // when :
+        int threadCount = 6;
 
-    }
+        final ExecutorService executorService = Executors.newFixedThreadPool(30);
+        final CountDownLatch countDownLatch = new CountDownLatch(threadCount);
+        for (int i = 0; i < threadCount; i++) {
+            executorService.submit(() -> {
+                try {
+                    userService.chargePoint(1L,2000);
+                } catch (Exception e) {
 
-    @Test
-    @DisplayName("3초뒤 연속충전 성공")
-    public void succss_recharge_after_5secs() throws InterruptedException {
-
-        lockHandler.unlock("user"+1L);
-        userService.chargePoint(1L,1000);
-        Thread.sleep(4000);
-        userService.chargePoint(1L,1000);
-        assertThat(userService.getPoint(1L)).isEqualTo(103000);
-
+                } finally {
+                    countDownLatch.countDown();
+                }
+            });
+        }
+        countDownLatch.await();
+        //then
+        assertThat(userService.getPoint(1L)).isEqualTo(110000);
     }
 }

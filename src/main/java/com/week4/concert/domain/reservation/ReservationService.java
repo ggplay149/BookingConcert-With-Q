@@ -1,5 +1,7 @@
 package com.week4.concert.domain.reservation;
 
+import com.week4.concert.base.lockHandler.LockHandler;
+import com.week4.concert.domain.concert.Concert;
 import com.week4.concert.infrastructure.reservation.ReservationEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,7 @@ public class ReservationService {
 
     private final ReservationReader reservationReader;
     private final ReservationAppender reservationAppender;
+    private final LockHandler lockHandler;
 
     public List<Integer> reservedSeat(String date, String title) {
         return reservationReader.reservedSeat(date, title);
@@ -33,21 +36,40 @@ public class ReservationService {
         return availableSeat;
     }
 
-    public void reserve(String concertDate, Long concertId, String concertTitle, Long userId, Integer seatNum) {
+    public void reserve(String reservationNumber, Long concertId) {
+        if(!lockHandler.lock(reservationNumber,concertId.toString(),300)){
+            throw new RuntimeException("임시 배정된 좌석입니다. 다른 좌석을 선택해주세요.");
+        }
+    }
+
+
+    public void finalConfirm(String reservationNumber, String concertTitle, Long userId) {
+
+        String[] temp = reservationNumber.split("\\.");
+        String concertDate = temp[0];
+        Integer seatNum = Integer.parseInt(temp[2]);
+
         reservationAppender.reserve(ReservationEntity
                 .builder()
-                .reservationNumber(concertDate + concertId + seatNum)
+                .reservationNumber(reservationNumber)
                 .seatNum(seatNum)
                 .userId(userId)
                 .title(concertTitle)
                 .reservationDate(concertDate)
-                .finalConfirm("N")
+                .finalConfirm("Y")
                 .build());
     }
 
-    public Reservation validReservationNumber(String reservationNumber){
-        return reservationReader.validReservationNumber(reservationNumber);
+    public Long getReservedConcertId(String reservationNumber) {
+        String concertId = lockHandler.getValue(reservationNumber);
+        if(concertId==null){
+            throw new RuntimeException("존재하지 않거나 유효시간이 만료된 예약번호 입니다.");
+        } else{
+            return Long.parseLong(concertId);
+        }
     }
 
-    public void finalConfirm(String reservationNumber) { reservationAppender.finalConfirm(reservationNumber);}
+    public void checkDuplicateReservation(String reservationNumber) {
+        reservationReader.checkReservation(reservationNumber);
+    }
 }

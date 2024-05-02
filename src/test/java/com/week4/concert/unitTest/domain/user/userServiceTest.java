@@ -7,6 +7,7 @@ import com.week4.concert.domain.user.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.redisson.api.RedissonClient;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
@@ -18,14 +19,16 @@ public class userServiceTest {
     private UserReader userReader;
     private UserPointCharger userPointCharger;
     private LockHandler lockHandler;
+    private RedissonClient redissonClient;
 
     @BeforeEach
     void setUp() {
         userReader = mock(UserReader.class);
         userPointCharger = mock(UserPointCharger.class);
-        lockHandler = mock(LockHandler.class);
+       // lockHandler = mock(LockHandler.class);
+        redissonClient = mock(RedissonClient.class);
 
-        userService = new UserService(userReader, userPointCharger,lockHandler);
+        userService = new UserService(userReader, userPointCharger,redissonClient);
     }
 
     @Test
