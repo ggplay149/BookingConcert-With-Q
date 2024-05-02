@@ -10,6 +10,7 @@ public class UserReader {
     private final UserRepository userRepository;
 
     public Integer getPoint(Long userId) {
+        System.out.println("잔액!!!!!"+userRepository.getPoint(userId));
         return userRepository.getPoint(userId);
     }
 }
