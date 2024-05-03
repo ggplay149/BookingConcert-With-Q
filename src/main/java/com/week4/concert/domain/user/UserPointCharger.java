@@ -9,9 +9,6 @@ public class UserPointCharger {
 
     private final UserRepository userRepository;
 
-    public void chargePoint(Long userId, Integer addPoint) {
-        System.out.println("충전됨!!!!!"+addPoint);
-        userRepository.chargePoint(userId, addPoint);
+    public void chargePoint(Long userId, Integer addPoint) { userRepository.chargePoint(userId, addPoint); }
 
-    }
 }

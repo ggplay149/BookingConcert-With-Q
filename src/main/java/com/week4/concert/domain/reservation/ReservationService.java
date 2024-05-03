@@ -37,7 +37,7 @@ public class ReservationService {
     }
 
     public void reserve(String reservationNumber, Long concertId) {
-        if(!lockHandler.lock(reservationNumber,concertId.toString(),300)){
+        if(!lockHandler.setExpirationTime(reservationNumber,concertId.toString(),300)){
             throw new RuntimeException("임시 배정된 좌석입니다. 다른 좌석을 선택해주세요.");
         }
     }

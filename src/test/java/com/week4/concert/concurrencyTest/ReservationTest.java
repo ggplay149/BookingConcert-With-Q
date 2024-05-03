@@ -2,8 +2,6 @@ package com.week4.concert.concurrencyTest;
 
 import com.week4.concert.application.ReservationUseCase;
 import com.week4.concert.base.lockHandler.LockHandler;
-import com.week4.concert.domain.user.UserPointCharger;
-import com.week4.concert.domain.user.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,7 +15,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
 
 @SpringBootTest
 public class ReservationTest {
@@ -29,7 +26,7 @@ public class ReservationTest {
     private LockHandler lockHandler;
 
     @BeforeEach
-    void resetRedis(){
+    void resetRedis() {
         lockHandler.reset();
     }
 
@@ -51,7 +48,7 @@ public class ReservationTest {
             final Long testId = idCount;
             executorService.submit(() -> {
                 try {
-                    result.add(reservationUseCase.reserve("20240504","PsyConcert",testId,5));
+                    result.add(reservationUseCase.reserve("20240504", "PsyConcert", testId, 5));
                 } catch (Exception e) {
                     result.add(e.getMessage());
                 } finally {
@@ -61,7 +58,7 @@ public class ReservationTest {
         }
         countDownLatch.await();
 
-        //then
+        //then : 1명만 임시배정 성공
         assertThat(result.get(0)).isEqualTo("[ 예약번호 : 20240504.2.5 ] 5분간 좌석이 임시 배정되었습니다. 결제완료시 최종 확정됩니다.");
         assertThat(result.get(1)).isEqualTo("임시 배정된 좌석입니다. 다른 좌석을 선택해주세요.");
         assertThat(result.get(2)).isEqualTo("임시 배정된 좌석입니다. 다른 좌석을 선택해주세요.");
@@ -71,14 +68,14 @@ public class ReservationTest {
 
     @Test
     @DisplayName("임시배정 시간 초과후 다음 예약 요청 성공")
-    public void success_reserve_after_unlock_time_out() throws InterruptedException {
+    public void success_reserve_after_unlock_time_out() {
 
         //given :먼저 예약
-        reservationUseCase.reserve("20240504","PsyConcert",2L,27);
+        reservationUseCase.reserve("20240504", "PsyConcert", 2L, 27);
 
         //when : 유효시간 지나고 ( = unlock), 다시 예약
-        lockHandler.unlock("20240504.2.27");
-        String result = reservationUseCase.reserve("20240504","PsyConcert",1L,27);
+        lockHandler.removeExpirationTime("20240504.2.27");
+        String result = reservationUseCase.reserve("20240504", "PsyConcert", 1L, 27);
 
         //then : 예약 성공 메세지
         assertThat(result).isEqualTo("[ 예약번호 : 20240504.2.27 ] 5분간 좌석이 임시 배정되었습니다. 결제완료시 최종 확정됩니다.");
