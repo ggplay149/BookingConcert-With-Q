@@ -22,7 +22,7 @@ public class QueueTest {
     private QueueUseCase queueUseCase;
 
 
-     @Test
+    @Test
     @DisplayName(" waiting or ongoing 테이블에 둘다 없으면 대기열입장 가능")
     void insertQueue1() {
         //given
