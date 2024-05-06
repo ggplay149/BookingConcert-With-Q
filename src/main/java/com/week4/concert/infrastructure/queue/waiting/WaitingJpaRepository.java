@@ -14,7 +14,6 @@ import java.util.Optional;
 
 public interface WaitingJpaRepository extends JpaRepository<WaitingEntity, Long> {
 
-    @Lock(LockModeType.PESSIMISTIC_WRITE)
     @Query("SELECT a FROM WaitingEntity a WHERE a.status = 'Waiting' AND a.userId =:userId")
     Optional<WaitingEntity> check(@Param("userId") Long uesrId);
 

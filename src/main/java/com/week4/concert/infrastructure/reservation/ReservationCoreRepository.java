@@ -30,10 +30,6 @@ public class ReservationCoreRepository implements ReservationRepository {
         }
     }
 
-    @Override
-    public void cancelNotConfirmReservation() {
-        reservationJpaRepository.cancelNotConfirmReservation();
-    }
 
     @Override
     public Reservation validReservationNumber(String reservationNumber) {

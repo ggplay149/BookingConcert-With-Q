@@ -12,8 +12,6 @@ public interface ReservationRepository {
 
     void reserve(ReservationEntity reservation);
 
-    void cancelNotConfirmReservation();
-
     Reservation validReservationNumber(String reservationNumber);
 
     void finalConfirm(String reservationNumber);
