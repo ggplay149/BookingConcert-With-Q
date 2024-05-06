@@ -2,6 +2,7 @@ package com.week4.concert.concurrencyTest;
 
 import com.week4.concert.application.ReservationUseCase;
 import com.week4.concert.base.lockHandler.LockHandler;
+import com.week4.concert.domain.reservation.ReservationExpirationHandler;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -21,6 +22,9 @@ public class ReservationTest {
 
     @Autowired
     private ReservationUseCase reservationUseCase;
+
+    @Autowired
+    private ReservationExpirationHandler reservationExpirationHandler;
 
     @Autowired
     private LockHandler lockHandler;
@@ -74,7 +78,7 @@ public class ReservationTest {
         reservationUseCase.reserve("20240504", "PsyConcert", 2L, 27);
 
         //when : 유효시간 지나고 ( = unlock), 다시 예약
-        lockHandler.removeExpirationTime("20240504.2.27");
+        reservationExpirationHandler.removeExpirationTime("20240504.2.27");
         String result = reservationUseCase.reserve("20240504", "PsyConcert", 1L, 27);
 
         //then : 예약 성공 메세지
