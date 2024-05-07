@@ -26,17 +26,27 @@ public class queueCoreRepository implements queueRepository {
     }
 
     @Override
-    public void insert(Long userId, String key) {
+    public void insertWait(Long userId) {
 
     }
 
     @Override
-    public void remove(Long userId, String key) {
+    public void insertActive(Long userId) {
 
     }
 
     @Override
-    public Integer countActive() {
-        return null;
+    public void removeWait(Long userId, String key) {
+
+    }
+
+    @Override
+    public void removeActive(Long userId, String key) {
+
+    }
+
+    @Override
+    public Long countActive() {
+        return redisTemplate.opsForSet().size("Active");
     }
 }

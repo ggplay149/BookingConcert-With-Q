@@ -4,10 +4,14 @@ public interface queueRepository {
 
     String checkUserStatus(Long userId);
 
-    void insert(Long userId,String key);
+    void insertWait(Long userId);
 
-    void remove(Long userId,String key);
+    void insertActive(Long userId);
 
-    Integer countActive();
+    void removeWait(Long userId,String key);
+
+    void removeActive(Long userId,String key);
+
+    Long countActive();
 
 }
