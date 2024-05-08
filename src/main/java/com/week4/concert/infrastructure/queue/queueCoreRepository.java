@@ -60,6 +60,6 @@ public class queueCoreRepository implements QueueRepository {
     @Override
     public String[] getTopNFromWait(Long topN) {
         Set<String> topValues = redisTemplate.opsForZSet().range("Wait", 0, topN - 1);
-        return topValues.toArray(new String[(Integer)topN]);
+        return topValues.toArray(new String[0]);
     }
 }
