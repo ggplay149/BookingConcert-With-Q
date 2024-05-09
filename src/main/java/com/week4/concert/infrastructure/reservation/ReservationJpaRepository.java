@@ -13,13 +13,6 @@ public interface ReservationJpaRepository extends JpaRepository<ReservationEntit
     @Query("SELECT a.seatNum FROM ReservationEntity a WHERE a.reservationDate=:date AND a.title=:title")
     Optional<List<Integer>> selectReservedSeat(@Param("date")String date, @Param("title")String title);
 
-
-    @Modifying
-    @Query("DELETE FROM ReservationEntity a " +
-            "WHERE TIMESTAMPDIFF(MINUTE, a.createdAt, CURRENT_TIMESTAMP) >= 5" +
-            "AND lower(a.finalConfirm) = 'n'")
-    void cancelNotConfirmReservation();
-
     @Query("SELECT a FROM ReservationEntity a WHERE a.reservationNumber=:reservationNumber")
     Optional<ReservationEntity> validReservationNumber(@Param("reservationNumber")String reservationNumber);
 

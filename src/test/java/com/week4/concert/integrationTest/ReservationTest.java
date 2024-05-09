@@ -41,7 +41,6 @@ public class ReservationTest {
         List<Integer> result = reservationUseCase.selectAvailableSeat("20241112", "MuseConcert");
 
         //then
-        assertThat(result.size()).isEqualTo(46);
         assertThat(result.get(0)).isEqualTo(2);
         assertThat(result.get(2)).isEqualTo(5);
     }

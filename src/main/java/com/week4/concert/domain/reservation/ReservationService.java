@@ -1,7 +1,5 @@
 package com.week4.concert.domain.reservation;
 
-import com.week4.concert.base.lockHandler.LockHandler;
-import com.week4.concert.domain.concert.Concert;
 import com.week4.concert.infrastructure.reservation.ReservationEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,7 +13,7 @@ public class ReservationService {
 
     private final ReservationReader reservationReader;
     private final ReservationAppender reservationAppender;
-    private final LockHandler lockHandler;
+    private final ReservationExpirationHandler reservationExpirationHandler;
 
     public List<Integer> reservedSeat(String date, String title) {
         return reservationReader.reservedSeat(date, title);
@@ -37,7 +35,7 @@ public class ReservationService {
     }
 
     public void reserve(String reservationNumber, Long concertId) {
-        if(!lockHandler.setExpirationTime(reservationNumber,concertId.toString(),300)){
+        if(!reservationExpirationHandler.setExpirationTime(reservationNumber,concertId.toString(),300)){
             throw new RuntimeException("임시 배정된 좌석입니다. 다른 좌석을 선택해주세요.");
         }
     }
@@ -61,7 +59,7 @@ public class ReservationService {
     }
 
     public Long getReservedConcertId(String reservationNumber) {
-        String concertId = lockHandler.getValue(reservationNumber);
+        String concertId = reservationExpirationHandler.validateExpiration(reservationNumber);
         if(concertId==null){
             throw new RuntimeException("존재하지 않거나 유효시간이 만료된 예약번호 입니다.");
         } else{
@@ -71,5 +69,13 @@ public class ReservationService {
 
     public void checkDuplicateReservation(String reservationNumber) {
         reservationReader.checkReservation(reservationNumber);
+    }
+
+    public Boolean setExpirationTime(String key, String value, long ttl) {
+        return reservationExpirationHandler.setExpirationTime(key,value,ttl);
+    }
+
+    public Boolean removeExpirationTime(String key) {
+        return reservationExpirationHandler.removeExpirationTime(key);
     }
 }

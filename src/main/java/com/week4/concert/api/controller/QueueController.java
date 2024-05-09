@@ -1,7 +1,7 @@
 package com.week4.concert.api.controller;
 
 import com.week4.concert.api.dto.QueueResponse;
-import com.week4.concert.application.QueueUseCase;
+import com.week4.concert.domain.queue.QueueService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -14,22 +14,24 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("queue")
 public class QueueController {
 
-    private final QueueUseCase queueUseCase;
+    private final QueueService queueService;
 
     @Operation(summary = "대기열 추가", description = "Parameter example) userId")
     @PostMapping("/{userId}/add")
-    public ResponseEntity<QueueResponse> insertQueue(@PathVariable Long userId){
+    public ResponseEntity<QueueResponse> insertQueue(@PathVariable Long userId) {
 
-        queueUseCase.insertQueue(userId);
+        queueService.insert(userId);
 
         return ResponseEntity.ok().body(QueueResponse.builder().message("대기열에 추가되었습니다.").build());
     }
 
     @Operation(summary = "대기열 조회", description = "Parameter example) userId")
     @GetMapping("/{userId}/check")
-    public ResponseEntity<QueueResponse> findAvailableSeat(@PathVariable Long userId){
+    public ResponseEntity<QueueResponse> findAvailableSeat(@PathVariable Long userId) {
 
-        return ResponseEntity.ok().body(QueueResponse.builder().message(queueUseCase.checkQueue(userId)).build());
+        return ResponseEntity.ok().body(QueueResponse.builder()
+                .message(queueService.checkUserStatus(userId))
+                .build());
 
     }
 }

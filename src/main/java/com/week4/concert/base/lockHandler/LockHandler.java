@@ -38,15 +38,6 @@ public class LockHandler {
         lock.unlock();
     }
 
-    public Boolean setExpirationTime(String key, String value, long ttl) {
-        return redisTemplate
-                .opsForValue()
-                .setIfAbsent(key, value, Duration.ofSeconds(ttl));
-    }
-
-    public Boolean removeExpirationTime(String key) {
-        return redisTemplate.delete(key);
-    }
 
     public String getValue(String key) {
         return redisTemplate.opsForValue().get(key);

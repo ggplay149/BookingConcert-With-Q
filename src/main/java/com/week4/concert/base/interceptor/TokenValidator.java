@@ -1,8 +1,7 @@
 package com.week4.concert.base.interceptor;
 
-import com.week4.concert.domain.queue.ongoing.OngoingSerivce;
+import com.week4.concert.domain.queue.QueueService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,10 +9,10 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class TokenValidator {
 
-    private final OngoingSerivce ongoingSerivce;
+    private final QueueService queueService;
 
     @Transactional
     public void valid(Long userId) {
-        ongoingSerivce.check(userId);
+
     }
 }

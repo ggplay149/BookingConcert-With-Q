@@ -6,7 +6,9 @@ import com.week4.concert.application.ReservationUseCase;
 import com.week4.concert.base.lockHandler.LockHandler;
 import com.week4.concert.domain.concert.ConcertService;
 import com.week4.concert.domain.payment.PaymentService;
+import com.week4.concert.domain.reservation.Reservation;
 import com.week4.concert.domain.reservation.ReservationService;
+import com.week4.concert.domain.reservation.ReservationExpirationHandler;
 import com.week4.concert.domain.user.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -32,6 +34,7 @@ public class PaymentTest {
     private PaymentUseCase paymentUseCase;
     @Autowired
     private LockHandler lockHandler;
+
     @Autowired
     private ReservationUseCase reservationUseCase;
 
@@ -63,7 +66,7 @@ public class PaymentTest {
 
         //when
         String reservationNumber = "20241112.5.49";
-        lockHandler.removeExpirationTime(reservationNumber);
+        reservationService.removeExpirationTime(reservationNumber);
 
         Exception result = assertThrows(RuntimeException.class,
                 () -> paymentUseCase.pay(reservationNumber, 1L));
