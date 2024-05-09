@@ -11,6 +11,7 @@ package com.week4.concert.infrastructure.queue;
 import com.week4.concert.domain.queue.QueueRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.stereotype.Repository;
 
 import java.util.Set;
@@ -19,47 +20,45 @@ import java.util.Set;
 @RequiredArgsConstructor
 public class queueCoreRepository implements QueueRepository {
 
-    private final RedisTemplate<String,String> redisTemplate;
+    private final RedisTemplate<String, String> redisTemplate;
 
     @Override
-    public Boolean checkUserStatus(Long userId) {
-        return redisTemplate.opsForSet().isMember("Active", userId.toString());
+    public Boolean checkUserStatus(Long userId, String key) {
+        if(redisTemplate.opsForZSet().score(key,userId.toString()) == null) return false;
+        return true;
     }
 
     @Override
-    public void insertWait(Long userId) {
-        Double score = (double) System.currentTimeMillis();
-        redisTemplate.opsForZSet().add("Wait", userId.toString(), score);
+    public void insert(Long userId, String key) {
+        Double score = (double) System.currentTimeMillis()/ 1000.0;
+        redisTemplate.opsForZSet().add(key, userId.toString(), score);
     }
 
     @Override
-    public void insertActive(Long userId) {
-        redisTemplate.opsForSet().add("Active", userId.toString());
+    public void remove(Long userId, String key) {
+        redisTemplate.opsForZSet().remove(key, userId.toString());
     }
 
     @Override
-    public void removeWait(Long userId) {
-        redisTemplate.opsForZSet().remove("Wait", userId.toString());
-    }
-
-    @Override
-    public void removeActive(Long userId) {
-        redisTemplate.opsForSet().remove("Active", userId.toString());
-    }
-
-    @Override
-    public Long countActive() {
-        return redisTemplate.opsForSet().size("Active");
+    public Long countActiveUsers() {
+        return redisTemplate.opsForZSet().size("Active");
     }
 
     @Override
     public void reset() {
-        redisTemplate.getConnectionFactory().getConnection().flushAll();
+        Set<String> keys = redisTemplate.keys("*");
+        if (keys != null) redisTemplate.delete(keys);
     }
 
     @Override
-    public String[] getTopNFromWait(Long topN) {
+    public String[] getNewActiveUsers(Long topN) {
         Set<String> topValues = redisTemplate.opsForZSet().range("Wait", 0, topN - 1);
         return topValues.toArray(new String[0]);
     }
+
+    @Override
+    public Set<ZSetOperations.TypedTuple<String>> getUserExpiryTime() {
+        return redisTemplate.opsForZSet().rangeWithScores("Active", 0, -1);
+    }
+
 }

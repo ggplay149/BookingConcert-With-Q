@@ -9,11 +9,5 @@ public class QueueAppender {
 
     private final QueueRepository queueRepository;
 
-    public void insertWait(Long userId){
-        queueRepository.insertWait(userId);
-    }
-
-    public void insertActive(Long userId){
-        queueRepository.insertActive(userId);
-    }
+    public void insert(Long userId,String key) { queueRepository.insert(userId, key); }
 }

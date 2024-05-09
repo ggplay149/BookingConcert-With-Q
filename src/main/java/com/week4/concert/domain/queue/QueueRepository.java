@@ -1,21 +1,25 @@
 package com.week4.concert.domain.queue;
 
+import org.springframework.data.redis.core.ZSetOperations;
+
+import java.util.Set;
+
 public interface QueueRepository {
 
-    Boolean checkUserStatus(Long userId);
+    Boolean checkUserStatus(Long userId, String key);
 
-    void insertWait(Long userId);
+    void insert(Long userId , String key);
 
-    void insertActive(Long userId);
+    void remove(Long userId , String key);
 
-    void removeWait(Long userId);
-
-    void removeActive(Long userId);
-
-    Long countActive();
+    Long countActiveUsers();
 
     void reset();
 
-    String[] getTopNFromWait(Long topN);
+    String[] getNewActiveUsers(Long topN);
+
+    Set<ZSetOperations.TypedTuple<String>> getUserExpiryTime();
+
+
 
 }

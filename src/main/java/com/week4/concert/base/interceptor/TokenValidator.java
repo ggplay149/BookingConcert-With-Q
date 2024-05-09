@@ -13,8 +13,6 @@ public class TokenValidator {
 
     @Transactional
     public void valid(Long userId) {
-        if(!queueService.checkUserStatus(userId)){
-            throw new RuntimeException("활성화 되지 않은 유저입니다.");
-        }
+
     }
 }

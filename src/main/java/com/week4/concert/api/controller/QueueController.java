@@ -1,7 +1,6 @@
 package com.week4.concert.api.controller;
 
 import com.week4.concert.api.dto.QueueResponse;
-import com.week4.concert.application.QueueUseCase;
 import com.week4.concert.domain.queue.QueueService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -19,7 +18,7 @@ public class QueueController {
 
     @Operation(summary = "대기열 추가", description = "Parameter example) userId")
     @PostMapping("/{userId}/add")
-    public ResponseEntity<QueueResponse> insertQueue(@PathVariable Long userId){
+    public ResponseEntity<QueueResponse> insertQueue(@PathVariable Long userId) {
 
         queueService.insert(userId);
 
@@ -28,9 +27,11 @@ public class QueueController {
 
     @Operation(summary = "대기열 조회", description = "Parameter example) userId")
     @GetMapping("/{userId}/check")
-    public ResponseEntity<QueueResponse> findAvailableSeat(@PathVariable Long userId){
-        String result = queueService.checkUserStatus(userId) ? "활성화된 유저입니다." : "대기중 입니다.";
-        return ResponseEntity.ok().body(QueueResponse.builder().message(result).build());
+    public ResponseEntity<QueueResponse> findAvailableSeat(@PathVariable Long userId) {
+
+        return ResponseEntity.ok().body(QueueResponse.builder()
+                .message(queueService.checkUserStatus(userId))
+                .build());
 
     }
 }

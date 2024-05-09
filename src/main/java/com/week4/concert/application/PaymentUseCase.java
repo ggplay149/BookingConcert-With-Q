@@ -3,8 +3,6 @@ package com.week4.concert.application;
 import com.week4.concert.domain.concert.Concert;
 import com.week4.concert.domain.concert.ConcertService;
 import com.week4.concert.domain.payment.PaymentService;
-import com.week4.concert.domain.queue.ongoing.OngoingSerivce;
-import com.week4.concert.domain.reservation.Reservation;
 import com.week4.concert.domain.reservation.ReservationService;
 import com.week4.concert.domain.user.UserService;
 import lombok.RequiredArgsConstructor;
@@ -27,11 +25,11 @@ public class PaymentUseCase {
 
         Concert reservedConcert = concertService.getConcert(reservedConcertId);
 
-        userService.checkPoint(reservedConcert.price(),userId);
+        userService.checkPoint(reservedConcert.price(), userId);
 
-        paymentService.pay(reservationNumber,userId);
+        paymentService.pay(reservationNumber, userId);
 
-        userService.usePoint(userId,reservedConcert.price());
+        userService.usePoint(userId, reservedConcert.price());
 
         reservationService.finalConfirm(reservationNumber, reservedConcert.title(), userId);
 

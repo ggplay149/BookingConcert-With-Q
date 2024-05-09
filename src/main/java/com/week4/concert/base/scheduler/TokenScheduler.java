@@ -1,6 +1,6 @@
 package com.week4.concert.base.scheduler;
 
-import com.week4.concert.application.QueueUseCase;
+import com.week4.concert.domain.queue.QueueService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -9,11 +9,12 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class TokenScheduler {
 
-    private final QueueUseCase queueUseCase;
+    private final QueueService queueService;
 
-    //10초간격
     @Scheduled(fixedRate = 10000)
-    public void tokenUpdate(){
-        queueUseCase.queueUpdate();
-    }
+    public void insertNewActiveUsers() { queueService.insertNewActiveUsers(); }
+
+    @Scheduled(fixedRate = 60000)
+    public void removeExpiredActiveUsers() { queueService.removeExpiredActiveUsers(); }
+
 }
