@@ -7,7 +7,9 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 
-@Table(name = "reservation")
+@Table(name = "reservation", indexes = {
+        @Index(name = "idx_reservation_number", columnList = "reservationNumber")
+})
 @Entity
 @Builder
 @Setter
@@ -21,7 +23,7 @@ public class ReservationEntity {
     @Column(name = "reservation_id", updatable = false)
     private Long id;
 
-    @Column(name = "reservationNumber", updatable = false, unique = true ,nullable = false)
+    @Column(name = "reservationNumber", updatable = false,nullable = false)
     private String reservationNumber;
 
     @Column(name = "reservation_date", nullable = false)
