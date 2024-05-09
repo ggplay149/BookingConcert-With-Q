@@ -8,6 +8,23 @@ TDD를 기반으로한 콘서트 예약 시스템 입니다.<br><br>
  <br>
 
   <details>
+<summary>쿼리분석 및 개선사항</summary>
+
+- Concert 조회  <br> <br>
+  : 추가/삭제의 빈도가 적고, 높은 Cardinality를 가진 컬럼들이 많지만, 현실적으로 콘서트 일정 자체가 100건이상 있기 힘듦. <br> <br>
+  
+  
+- Reseravation (예약내역) 조회 <br> <br>
+  : 중복이 아예없는 높은 Cardinality의 컬럼 "예약번호"를 인덱스로 잡아 성능 개선 <br>
+  1만건까지의 성능차이는 미비 했으나,
+10만,100만건 조회부터는 쿼리 소요시간에서 30% 이상의 감소
+  
+ <br>
+  
+
+</details>
+
+  <details>
 <summary>대기열 구현</summary>  
    
  <br>
