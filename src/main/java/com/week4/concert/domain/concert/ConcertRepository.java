@@ -4,9 +4,12 @@ import java.util.List;
 
 public interface ConcertRepository {
 
-    Concert getConcertInfo(String concertDate, String concertTitle);
+    Concert getConcertByTitle(String concertDate, String concertTitle);
+
+    Concert getConcertInfoById(Long reservedConcertId);
 
     List<Concert> findAvailableConcertAndDate();
 
-    Concert getConcertInfoById(Long reservedConcertId);
+    void increaseReservationCount(Long concertId);
+
 }

@@ -15,7 +15,7 @@ public class ConcertCoreRepository implements ConcertRepository {
     private final ConcertJpaRepository concertJpaRepository;
 
     @Override
-    public Concert getConcertInfo(String date, String title) {
+    public Concert getConcertByTitle(String date, String title) {
         return concertJpaRepository.findByDateAndTitle(date,title)
                 .orElseThrow(() -> new EntityNotFoundException("조회되는 콘서트가 없습니다."))
                 .toConcert();
@@ -29,6 +29,11 @@ public class ConcertCoreRepository implements ConcertRepository {
                 .stream()
                 .map(ConcertEntity::toConcert)
                 .toList();
+    }
+
+    @Override
+    public void increaseReservationCount(Long concertId) {
+
     }
 
     @Override

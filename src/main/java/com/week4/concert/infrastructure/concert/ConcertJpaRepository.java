@@ -1,7 +1,9 @@
 package com.week4.concert.infrastructure.concert;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -13,5 +15,9 @@ public interface ConcertJpaRepository extends JpaRepository<ConcertEntity, Long>
 
     @Query("SELECT a FROM ConcertEntity a WHERE a.reservedCount < a.capacity")
     Optional<List<ConcertEntity>> findAvailableConcertAndDate();
+
+    @Modifying
+    @Query("UPDATE ConcertEntity a SET a.finalConfirm = 'Y' WHERE a.reservationNumber =:reservationNumber")
+    void finalConfirm(@Param("reservationNumber")String reservationNumber);
 
 }

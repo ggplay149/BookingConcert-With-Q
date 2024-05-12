@@ -19,26 +19,27 @@ public class ReservationUseCase {
     @Transactional(readOnly = true)
     public List<Integer> selectAvailableSeat(String date, String title) {
 
-        Integer capactiy = concertService.getConcertInfo(date, title).capacity();
+        Integer capactiy = concertService.getConcertByTitle(date, title).capacity();
 
-        List<Integer> availableSeat = reservationService.availableSeat(date, title, capactiy);
+        List<Integer> availableSeat = reservationService.getAvailableSeat(date, title, capactiy);
 
         return availableSeat;
     }
 
 
     @Transactional
-    public String reserve(String date, String title, Long userId, Integer seatNum) {
+    public String createTemporaryReservation(String date, String title, Long userId, Integer seatNum) {
 
-        Long concertId = concertService.getConcertInfo(date, title).id();
+        Long concertId = concertService.getConcertByTitle(date, title).id();
 
         String reservationNumber = date+"."+concertId+"."+seatNum;
 
         reservationService.checkDuplicateReservation(reservationNumber);
 
-        reservationService.reserve(reservationNumber,concertId);
+        reservationService.createTemporaryReservation(reservationNumber,concertId);
 
         return "[ 예약번호 : "+reservationNumber+" ] 5분간 좌석이 임시 배정되었습니다. 결제완료시 최종 확정됩니다.";
 
     }
 }
+

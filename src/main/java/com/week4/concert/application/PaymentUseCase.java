@@ -23,7 +23,7 @@ public class PaymentUseCase {
 
         Long reservedConcertId = reservationService.getReservedConcertId(reservationNumber);
 
-        Concert reservedConcert = concertService.getConcert(reservedConcertId);
+        Concert reservedConcert = concertService.getConcertById(reservedConcertId);
 
         userService.checkPoint(reservedConcert.price(), userId);
 
@@ -31,8 +31,13 @@ public class PaymentUseCase {
 
         userService.usePoint(userId, reservedConcert.price());
 
-        reservationService.finalConfirm(reservationNumber, reservedConcert.title(), userId);
+        reservationService.finalizeConfirmation(reservationNumber, reservedConcert.title(), userId);
+
+        concertService.increaseReservationCount(reservedConcert.id());
 
         return "정상 결제되었습니다. 예약이 확정되었습니다.";
     }
 }
+
+
+

@@ -6,15 +6,14 @@ import java.util.List;
 
 public interface ReservationRepository {
 
-
+    void reserve(ReservationEntity reservation);
 
     List<Integer> selectReservedSeat(String date, String title);
 
-    void reserve(ReservationEntity reservation);
+    void checkDuplicateReservation(String reservationNumber);
 
-    Reservation validReservationNumber(String reservationNumber);
+    Boolean createTemporaryReservation(String key, String value, long ttl);
 
-    void finalConfirm(String reservationNumber);
+    String validateExpiration(String key);
 
-    void checkReservation(String reservationNumber);
 }

@@ -25,8 +25,7 @@ public class ConcertController {
 
         return ResponseEntity.ok().body(ConcertResponse
                 .builder()
-                .availableConcert(concertService.showAvailableConcertList())
+                .availableConcert(concertService.getConcertByTitle())
                 .build());
-
     }
 }

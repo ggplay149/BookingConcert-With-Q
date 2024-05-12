@@ -13,16 +13,16 @@ public class ReservationService {
 
     private final ReservationReader reservationReader;
     private final ReservationAppender reservationAppender;
-    private final ReservationExpirationHandler reservationExpirationHandler;
 
-    public List<Integer> reservedSeat(String date, String title) {
+    public List<Integer> getReservedSeat(String date, String title) {
         return reservationReader.reservedSeat(date, title);
     }
 
 
-    public List<Integer> availableSeat(String date, String title, Integer capacity) {
+    public List<Integer> getAvailableSeat(String date, String title, Integer capacity) {
 
-        List<Integer> reserved = reservedSeat(date, title);
+        List<Integer> reserved = getReservedSeat(date, title);
+
         List<Integer> availableSeat = new ArrayList<>();
         for (int i = 1; i <= capacity; i++) availableSeat.add(i);
 
@@ -31,17 +31,18 @@ public class ReservationService {
             int temp = availableSeat.indexOf(reserved.get(i));
             availableSeat.remove(temp);
         }
+
         return availableSeat;
     }
 
-    public void reserve(String reservationNumber, Long concertId) {
-        if(!reservationExpirationHandler.setExpirationTime(reservationNumber,concertId.toString(),300)){
+    public void createTemporaryReservation(String reservationNumber, Long concertId) {
+        if(!reservationAppender.createTemporaryReservation(reservationNumber,concertId.toString(),300)){
             throw new RuntimeException("임시 배정된 좌석입니다. 다른 좌석을 선택해주세요.");
         }
     }
 
 
-    public void finalConfirm(String reservationNumber, String concertTitle, Long userId) {
+    public void finalizeConfirmation(String reservationNumber, String concertTitle, Long userId) {
 
         String[] temp = reservationNumber.split("\\.");
         String concertDate = temp[0];
@@ -59,7 +60,7 @@ public class ReservationService {
     }
 
     public Long getReservedConcertId(String reservationNumber) {
-        String concertId = reservationExpirationHandler.validateExpiration(reservationNumber);
+        String concertId = reservationReader.validateExpiration(reservationNumber);
         if(concertId==null){
             throw new RuntimeException("존재하지 않거나 유효시간이 만료된 예약번호 입니다.");
         } else{
@@ -68,14 +69,6 @@ public class ReservationService {
     }
 
     public void checkDuplicateReservation(String reservationNumber) {
-        reservationReader.checkReservation(reservationNumber);
-    }
-
-    public Boolean setExpirationTime(String key, String value, long ttl) {
-        return reservationExpirationHandler.setExpirationTime(key,value,ttl);
-    }
-
-    public Boolean removeExpirationTime(String key) {
-        return reservationExpirationHandler.removeExpirationTime(key);
+        reservationReader.checkDuplicateReservation(reservationNumber);
     }
 }

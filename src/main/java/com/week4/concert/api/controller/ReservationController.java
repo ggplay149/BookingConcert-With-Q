@@ -42,7 +42,7 @@ public class ReservationController {
         return ResponseEntity.ok().body(
                 ReservationResponse
                         .builder()
-                        .message(reservationUseCase.reserve(date,title,userId,seatNum))
+                        .message(reservationUseCase.createTemporaryReservation(date,title,userId,seatNum))
                         .build());
     }
 }

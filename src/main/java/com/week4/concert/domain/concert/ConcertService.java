@@ -13,23 +13,27 @@ import java.util.List;
 public class ConcertService {
 
     private final ConcertReader concertReader;
+    private final ConcertAppender concertAppender;
 
 
-    public Concert getConcertInfo(String date, String title){
-        return concertReader.getConcertInfo(date,title);
+    public Concert getConcertByTitle(String date, String title) {
+        return concertReader.getConcertByTitle(date, title);
     }
 
+    public Concert getConcertById(Long reservedConcertId) {
+        return concertReader.getConcertInfoById(reservedConcertId);
+    }
 
-    public List<String> showAvailableConcertList() {
+    public void increaseReservationCount(Long concertId) {
+        concertAppender.increaseReservationCount(concertId);
+    }
+
+    public List<String> getConcertByTitle() {
         List<String> list = new ArrayList<>();
-        for(Concert c : concertReader.findAvailableConcertAndDate()){
-            String form = "[ "+c.date()+" / " +c.title()+" ]";
+        for (Concert c : concertReader.findAvailableConcertAndDate()) {
+            String form = "[ " + c.date() + " / " + c.title() + " ]";
             list.add(form);
         }
         return list;
-    }
-
-    public Concert getConcert(Long reservedConcertId) {
-        return concertReader.getConcertInfoById(reservedConcertId);
     }
 }

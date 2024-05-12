@@ -12,13 +12,16 @@ public class ConcertReader {
     private final ConcertRepository concertRepository;
 
 
-    public Concert getConcertInfo(String date, String title) {
-        return concertRepository.getConcertInfo(date, title);
+    public Concert getConcertByTitle(String date, String title) {
+        return concertRepository.getConcertByTitle(date, title);
+    }
+
+    public Concert getConcertInfoById(Long reservedConcertId) {
+        return concertRepository.getConcertInfoById(reservedConcertId);
     }
 
     public List<Concert> findAvailableConcertAndDate() {
         return concertRepository.findAvailableConcertAndDate();
     }
 
-    public Concert getConcertInfoById(Long reservedConcertId) { return concertRepository.getConcertInfoById(reservedConcertId);}
 }

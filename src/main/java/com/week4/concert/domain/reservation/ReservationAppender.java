@@ -10,8 +10,12 @@ public class ReservationAppender {
 
     private final ReservationRepository reservationRepository;
 
-    public void reserve (ReservationEntity reservation) { reservationRepository.reserve(reservation); }
+    public void reserve (ReservationEntity reservation) {
+        reservationRepository.reserve(reservation);
+    }
 
-    public void finalConfirm(String reservationNumber) { reservationRepository.finalConfirm(reservationNumber);}
+    public Boolean createTemporaryReservation(String key, String value, long ttl) {
+        return reservationRepository.createTemporaryReservation(key, value, ttl);
+    }
 
 }

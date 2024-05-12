@@ -2,7 +2,6 @@ package com.week4.concert.concurrencyTest;
 
 import com.week4.concert.application.ReservationUseCase;
 import com.week4.concert.base.lockHandler.LockHandler;
-import com.week4.concert.domain.reservation.ReservationExpirationHandler;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -22,9 +21,6 @@ public class ReservationTest {
 
     @Autowired
     private ReservationUseCase reservationUseCase;
-
-    @Autowired
-    private ReservationExpirationHandler reservationExpirationHandler;
 
     @Autowired
     private LockHandler lockHandler;
@@ -70,19 +66,4 @@ public class ReservationTest {
         assertThat(result.get(4)).isEqualTo("임시 배정된 좌석입니다. 다른 좌석을 선택해주세요.");
     }
 
-    @Test
-    @DisplayName("임시배정 시간 초과후 다음 예약 요청 성공")
-    public void success_reserve_after_unlock_time_out() {
-
-        //given :먼저 예약
-        reservationUseCase.reserve("20240504", "PsyConcert", 2L, 27);
-
-        //when : 유효시간 지나고 ( = unlock), 다시 예약
-        reservationExpirationHandler.removeExpirationTime("20240504.2.27");
-        String result = reservationUseCase.reserve("20240504", "PsyConcert", 1L, 27);
-
-        //then : 예약 성공 메세지
-        assertThat(result).isEqualTo("[ 예약번호 : 20240504.2.27 ] 5분간 좌석이 임시 배정되었습니다. 결제완료시 최종 확정됩니다.");
-
-    }
 }

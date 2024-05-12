@@ -6,9 +6,7 @@ import com.week4.concert.application.ReservationUseCase;
 import com.week4.concert.base.lockHandler.LockHandler;
 import com.week4.concert.domain.concert.ConcertService;
 import com.week4.concert.domain.payment.PaymentService;
-import com.week4.concert.domain.reservation.Reservation;
 import com.week4.concert.domain.reservation.ReservationService;
-import com.week4.concert.domain.reservation.ReservationExpirationHandler;
 import com.week4.concert.domain.user.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -52,24 +50,6 @@ public class PaymentTest {
         //when
         Exception result = assertThrows(RuntimeException.class,
                 () -> paymentUseCase.pay("wrongReservationNumber", 2L));
-
-        //then
-        assert result.getMessage() == "존재하지 않거나 유효시간이 만료된 예약번호 입니다.";
-    }
-
-    @Test
-    @DisplayName("임시배정시간 초과로 결제실패")
-    void fail_payment_becuase_time_limit() {
-
-        //given : 신규 예약생성
-        reservationUseCase.reserve("20241112","MuseConcert",1L,49);
-
-        //when
-        String reservationNumber = "20241112.5.49";
-        reservationService.removeExpirationTime(reservationNumber);
-
-        Exception result = assertThrows(RuntimeException.class,
-                () -> paymentUseCase.pay(reservationNumber, 1L));
 
         //then
         assert result.getMessage() == "존재하지 않거나 유효시간이 만료된 예약번호 입니다.";

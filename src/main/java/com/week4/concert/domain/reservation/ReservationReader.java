@@ -12,14 +12,13 @@ public class ReservationReader {
     private final ReservationRepository reservationRepository;
 
     public List<Integer> reservedSeat(String date, String title) {
-        return reservationRepository.selectReservedSeat(date, title);
+        return reservationRepository.selectReservedSeat(date, title);    }
+
+    public void checkDuplicateReservation(String reservationNumber) {
+        reservationRepository.checkDuplicateReservation(reservationNumber);
     }
 
-    public Reservation validReservationNumber(String reservationNumber) {
-        return reservationRepository.validReservationNumber(reservationNumber);
-    }
-
-    public void checkReservation(String reservationNumber) {
-        reservationRepository.checkReservation(reservationNumber);
+    public String validateExpiration(String key){
+        return reservationRepository.validateExpiration(key);
     }
 }

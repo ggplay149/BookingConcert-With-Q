@@ -37,7 +37,7 @@ public class reservationUseCaseTest {
         //given
         List<Integer> list = Fixtures.reservedList("아이유콘서트");
         Concert testConcert = Fixtures.concert("아이유콘서트");
-        given(reservationService.availableSeat(any(),any(),any())).willReturn(list);
+        given(reservationService.getAvailableSeat(any(),any(),any())).willReturn(list);
         given(concertService.getConcertInfo(any(), any())).willReturn(testConcert);
 
         //when
