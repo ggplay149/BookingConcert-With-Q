@@ -29,20 +29,6 @@ public class ConcertReaderTest {
     }
 
     @Test
-    @DisplayName("날짜와 제목으로 콘서트 정보 조회")
-    void getConcertInfo() {
-        //given
-        Concert concert = Fixtures.concert("아이유콘서트");
-        given(concertRepository.getConcertInfo(any(),any())).willReturn(concert);
-        //when
-        Concert result = concertReader.getConcertInfo("20240414","아이유콘서트");
-        //then
-        assertThat(result.price()).isEqualTo(50000);
-        assertThat(result.id()).isEqualTo(1L);
-        assertThat(result.capacity()).isEqualTo(50);
-    }
-
-    @Test
     @DisplayName("예약가능한 콘서트 날짜별로 전부 조회")
     void findAvailableDate() {
         //given

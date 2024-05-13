@@ -43,7 +43,6 @@ public class UserService {
     @Transactional
     public void usePoint(Long userId, Integer concertPrice){
         if (getPoint(userId) - concertPrice < 0) throw new RuntimeException("잔액이 부족합니다.");
-
         lockHandler.lock("user"+userId,3,1);
         try {
             chargePoint(userId, concertPrice * -1);

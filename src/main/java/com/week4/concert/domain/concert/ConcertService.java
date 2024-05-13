@@ -14,7 +14,6 @@ import java.util.List;
 public class ConcertService {
 
     private final ConcertReader concertReader;
-    private final ConcertAppender concertAppender;
 
 
     public Concert getConcertByTitle(String date, String title) {
@@ -30,7 +29,7 @@ public class ConcertService {
         concert.setReservedCount(concert.getReservedCount()+1);
     }
 
-    public List<String> getConcertByTitle() {
+    public List<String> showAvailableConcertList() {
         List<String> list = new ArrayList<>();
         for (Concert c : concertReader.findAvailableConcertAndDate()) {
             String form = "[ " + c.date() + " / " + c.title() + " ]";
