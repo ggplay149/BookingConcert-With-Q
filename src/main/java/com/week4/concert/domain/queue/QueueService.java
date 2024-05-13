@@ -75,4 +75,9 @@ public class QueueService {
             }
         }
     }
+
+    public void removeActiveUser(Long userId){
+        queueRemover.remove(userId,"Active");
+    }
+
 }
