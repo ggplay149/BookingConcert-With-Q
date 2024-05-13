@@ -53,7 +53,7 @@ public class ReservationTest {
 
         //when : 같은 날짜,콘서트,좌석으로 다시 예약
         Exception result = assertThrows(RuntimeException.class
-                ,() -> reservationUseCase.reserve("20241112","MuseConcert",3L,4));
+                ,() -> reservationUseCase.createTemporaryReservation("20241112","MuseConcert",3L,4));
 
         //then
         assertThat(result.getMessage()).isEqualTo("예약된 좌석입니다.");
@@ -66,7 +66,7 @@ public class ReservationTest {
         //given
 
         //when
-        String result = reservationUseCase.reserve("20241112","MuseConcert",3L,49);
+        String result = reservationUseCase.createTemporaryReservation("20241112","MuseConcert",3L,49);
 
         //then
         assertThat(result).isEqualTo("[ 예약번호 : 20241112.5.49 ] 5분간 좌석이 임시 배정되었습니다. 결제완료시 최종 확정됩니다.");

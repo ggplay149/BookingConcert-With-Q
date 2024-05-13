@@ -60,7 +60,7 @@ public class PaymentTest {
     void fail_payment_becuase_not_enough_point() {
 
         //given : 신규 예약생성, data.sql로 user 2포인트 보유설정
-        String temp = reservationUseCase.reserve("20241112","MuseConcert",4L,34);
+        String temp = reservationUseCase.createTemporaryReservation("20241112","MuseConcert",4L,34);
 
         //when
         String reservationNumber = "20241112.5.34";
@@ -77,7 +77,7 @@ public class PaymentTest {
     void success_payment() {
 
         //given : 신규 예약생성
-        reservationUseCase.reserve("20241112","MuseConcert",1L,48);
+        reservationUseCase.createTemporaryReservation("20241112","MuseConcert",1L,48);
 
         //when
         String reservationNumber = "20241112.5.48";
