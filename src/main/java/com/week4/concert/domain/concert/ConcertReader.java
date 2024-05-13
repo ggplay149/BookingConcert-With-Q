@@ -1,5 +1,6 @@
 package com.week4.concert.domain.concert;
 
+import com.week4.concert.infrastructure.concert.ConcertEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -12,12 +13,12 @@ public class ConcertReader {
     private final ConcertRepository concertRepository;
 
 
-    public Concert getConcertByTitle(String date, String title) {
+    public ConcertEntity getConcertByTitle(String date, String title) {
         return concertRepository.getConcertByTitle(date, title);
     }
 
-    public Concert getConcertInfoById(Long reservedConcertId) {
-        return concertRepository.getConcertInfoById(reservedConcertId);
+    public ConcertEntity getConcertById(Long reservedConcertId) {
+        return concertRepository.getConcertById(reservedConcertId);
     }
 
     public List<Concert> findAvailableConcertAndDate() {

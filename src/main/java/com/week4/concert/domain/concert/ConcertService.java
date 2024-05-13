@@ -1,5 +1,6 @@
 package com.week4.concert.domain.concert;
 
+import com.week4.concert.infrastructure.concert.ConcertEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,15 +18,16 @@ public class ConcertService {
 
 
     public Concert getConcertByTitle(String date, String title) {
-        return concertReader.getConcertByTitle(date, title);
+        return concertReader.getConcertByTitle(date, title).toConcert();
     }
 
     public Concert getConcertById(Long reservedConcertId) {
-        return concertReader.getConcertInfoById(reservedConcertId);
+        return concertReader.getConcertById(reservedConcertId).toConcert();
     }
 
     public void increaseReservationCount(Long concertId) {
-        concertAppender.increaseReservationCount(concertId);
+        ConcertEntity concert = concertReader.getConcertById(concertId);
+        concert.setReservedCount(concert.getReservedCount()+1);
     }
 
     public List<String> getConcertByTitle() {

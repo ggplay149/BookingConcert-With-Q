@@ -16,8 +16,4 @@ public interface ConcertJpaRepository extends JpaRepository<ConcertEntity, Long>
     @Query("SELECT a FROM ConcertEntity a WHERE a.reservedCount < a.capacity")
     Optional<List<ConcertEntity>> findAvailableConcertAndDate();
 
-    @Modifying
-    @Query("UPDATE ConcertEntity a SET a.finalConfirm = 'Y' WHERE a.reservationNumber =:reservationNumber")
-    void finalConfirm(@Param("reservationNumber")String reservationNumber);
-
 }

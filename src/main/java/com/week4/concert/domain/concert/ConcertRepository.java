@@ -1,12 +1,14 @@
 package com.week4.concert.domain.concert;
 
+import com.week4.concert.infrastructure.concert.ConcertEntity;
+
 import java.util.List;
 
 public interface ConcertRepository {
 
-    Concert getConcertByTitle(String concertDate, String concertTitle);
+    ConcertEntity getConcertByTitle(String concertDate, String concertTitle);
 
-    Concert getConcertInfoById(Long reservedConcertId);
+    ConcertEntity getConcertById(Long reservedConcertId);
 
     List<Concert> findAvailableConcertAndDate();
 
