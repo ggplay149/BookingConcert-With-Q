@@ -11,9 +11,9 @@ import org.springframework.transaction.event.TransactionalEventListener;
 public class PaymentEventListener {
 
     private final MessageService messageService;
-//
-//    @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
-//    public void send(){
-//
-//    }
+
+    @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
+    public void send(PaymentEvent event){
+        messageService.send();
+    }
 }
