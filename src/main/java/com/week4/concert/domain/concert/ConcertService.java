@@ -25,8 +25,12 @@ public class ConcertService {
     }
 
     public void increaseReservationCount(Long concertId) {
-        ConcertEntity concert = concertReader.getConcertById(concertId);
-        concert.setReservedCount(concert.getReservedCount()+1);
+        try {
+            ConcertEntity concert = concertReader.getConcertById(concertId);
+            concert.setReservedCount(concert.getReservedCount() + 1);
+        }catch (Exception e){
+            throw new RuntimeException("매진된 콘서트 입니다.");
+        }
     }
 
     public List<String> showAvailableConcertList() {
