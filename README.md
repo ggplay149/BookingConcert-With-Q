@@ -6,6 +6,43 @@ TDD를 기반으로한 콘서트 예약 시스템 입니다.<br><br>
 나머지 인원은 대기열 시스템에의해 관리됩니다.<br><br>
 앞선 이용자가 서비스이용이 끝나면, 대기중인 유저들은 순차적으로 권한을 부여받습니다. <br><br>
  <br>
+ 
+ <details>
+<summary>트랜잭션 분석과 책임 분리 설계 문서</summary>
+
+ <br>  
+  Link : https://ggplay149.tistory.com/50
+  <br>
+
+</details>
+
+ <details>
+<summary>ApplicationEvent 와 Kafka 사용을 통한 책임분리 과정 PR</summary>
+
+ <br>
+
+- Application Event 활용
+  
+ <br>
+
+![image](https://github.com/ggplay149/ConcertBookingServer/assets/142002833/c58b809d-f36b-4d07-a3d9-295f00e7d1f6)
+
+
+
+ <br>
+ 
+- Kafka 활용
+
+ <br>
+
+![image](https://github.com/ggplay149/ConcertBookingServer/assets/142002833/1de85752-5d9a-40a2-83e7-0c76fa2007a4)
+  
+
+</details>
+
+ <br>
+
+ 
 
   <details>
 <summary>쿼리분석 및 개선사항</summary>
