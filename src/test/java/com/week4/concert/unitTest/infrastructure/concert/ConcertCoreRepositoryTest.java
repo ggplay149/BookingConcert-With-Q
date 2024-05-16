@@ -35,7 +35,7 @@ public class ConcertCoreRepositoryTest {
         given(concertJpaRepository.findByDateAndTitle(concertDate,concertTitle)).willReturn(Optional.empty());
 
         //when
-        Exception e = assertThrows(EntityNotFoundException.class, () -> concertCoreRepository.getConcertInfo(concertDate, concertTitle));
+        Exception e = assertThrows(EntityNotFoundException.class, () -> concertCoreRepository.getConcertByTitle(concertDate, concertTitle));
         //then
         assertThat(e.getMessage()).isEqualTo("조회되는 콘서트가 없습니다.");
     }

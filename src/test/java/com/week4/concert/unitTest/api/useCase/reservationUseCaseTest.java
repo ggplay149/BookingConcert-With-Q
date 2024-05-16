@@ -38,7 +38,7 @@ public class reservationUseCaseTest {
         List<Integer> list = Fixtures.reservedList("아이유콘서트");
         Concert testConcert = Fixtures.concert("아이유콘서트");
         given(reservationService.getAvailableSeat(any(),any(),any())).willReturn(list);
-        given(concertService.getConcertInfo(any(), any())).willReturn(testConcert);
+        given(concertService.getConcertByTitle(any(), any())).willReturn(testConcert);
 
         //when
         List<Integer> result = reservationUseCase.selectAvailableSeat("202020", "아이유콘서트");

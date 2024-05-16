@@ -48,7 +48,7 @@ public class ReservationTest {
             final Long testId = idCount;
             executorService.submit(() -> {
                 try {
-                    result.add(reservationUseCase.reserve("20240504", "PsyConcert", testId, 5));
+                    result.add(reservationUseCase.createTemporaryReservation("20240504", "PsyConcert", testId, 5));
                 } catch (Exception e) {
                     result.add(e.getMessage());
                 } finally {
