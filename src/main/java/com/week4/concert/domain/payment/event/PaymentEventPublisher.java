@@ -11,8 +11,6 @@ public class PaymentEventPublisher {
     private final ApplicationEventPublisher applicationEventPublisher;
 
     public void publishEvent(PaymentEvent event){
-
         applicationEventPublisher.publishEvent(event);
-
     }
 }
