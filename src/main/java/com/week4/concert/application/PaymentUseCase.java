@@ -37,7 +37,7 @@ public class PaymentUseCase {
 
         concertService.increaseReservationCount(reservedConcert.id());
 
-        paymentEventPublisher.publishEvent(new PaymentEvent(reservationNumber, reservedConcert, userId));
+        paymentEventPublisher.publishEvent(userId);
 
         return "정상 결제되었습니다. 예약이 확정되었습니다.";
     }
