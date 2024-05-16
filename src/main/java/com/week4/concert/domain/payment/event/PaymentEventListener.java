@@ -15,8 +15,6 @@ import org.springframework.transaction.event.TransactionalEventListener;
 public class PaymentEventListener {
 
     private final MessageService messageService;
-    private final ReservationService reservationService;
-    private final ConcertService concertService;
     private final QueueService queueService;
 
     @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
