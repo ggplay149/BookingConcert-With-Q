@@ -1,4 +1,4 @@
-package com.week4.concert.domain.payment;
+package com.week4.concert.domain.payment.event;
 
 import com.week4.concert.domain.concert.Concert;
 
