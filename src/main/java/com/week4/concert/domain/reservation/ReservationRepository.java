@@ -12,8 +12,10 @@ public interface ReservationRepository {
 
     void checkDuplicateReservation(String reservationNumber);
 
+    String validateExpiration(String key);
+
     Boolean createTemporaryReservation(String key, String value, long ttl);
 
-    String validateExpiration(String key);
+    void removeTemporaryReservation(String key);
 
 }

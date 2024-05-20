@@ -13,6 +13,7 @@ public class ReservationService {
 
     private final ReservationReader reservationReader;
     private final ReservationAppender reservationAppender;
+    private final ReservationRemover reservationRemover;
 
     public List<Integer> getReservedSeat(String date, String title) {
         return reservationReader.reservedSeat(date, title);
@@ -70,5 +71,9 @@ public class ReservationService {
 
     public void checkDuplicateReservation(String reservationNumber) {
         reservationReader.checkDuplicateReservation(reservationNumber);
+    }
+
+    public void removeTemporaryReservation(String reservationNubmer){
+        reservationRemover.removeTemporaryReservation(reservationNubmer);
     }
 }

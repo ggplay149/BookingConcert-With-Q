@@ -1,7 +1,6 @@
 package com.week4.concert.domain.payment.event;
 
 import com.week4.concert.admin.MessageService;
-import com.week4.concert.domain.concert.ConcertService;
 import com.week4.concert.domain.queue.QueueService;
 import com.week4.concert.domain.reservation.ReservationService;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +15,7 @@ public class PaymentEventListener {
 
     private final MessageService messageService;
     private final QueueService queueService;
+    private final ReservationService reservationService;
 
     @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
     @Async
@@ -29,6 +29,11 @@ public class PaymentEventListener {
         queueService.removeActiveUser(event.userId());
     }
 
+    @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
+    @Async
+    public void removeTemporaryReservation(PaymentEvent event) {
+        reservationService.removeTemporaryReservation(event.reservationNumber());
+    }
 }
 
 
