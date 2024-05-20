@@ -22,7 +22,6 @@ public class KafkaProducerConfig {
         config.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
 
         DefaultKafkaProducerFactory<String, Object> producerFactory = new DefaultKafkaProducerFactory<>(config);
-        //producerFactory.setTransactionIdPrefix("tx-");
 
         return producerFactory;
     }
