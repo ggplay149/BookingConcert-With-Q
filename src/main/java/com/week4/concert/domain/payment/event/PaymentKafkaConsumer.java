@@ -15,7 +15,6 @@ import org.springframework.stereotype.Component;
 public class PaymentKafkaConsumer {
     private final MessageService messageService;
     private final QueueService queueService;
-    private final ReservationService reservationService;
 
     @KafkaListener(topics = "payment", groupId = "payment-message")
     public void sendMessage() {
