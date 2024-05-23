@@ -11,7 +11,7 @@ TDD를 기반으로한 콘서트 예약 시스템 입니다.<br><br>
 <summary>부하 테스트 설계 와 장애대응</summary>
 
  <br>  
-  Link : [https://ggplay149.tistory.com/50](https://ggplay149.tistory.com/51)
+  Link : https://ggplay149.tistory.com/51
   
   <br>
 <br>
