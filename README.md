@@ -6,7 +6,18 @@ TDD를 기반으로한 콘서트 예약 시스템 입니다.<br><br>
 나머지 인원은 대기열 시스템에의해 관리됩니다.<br><br>
 앞선 이용자가 서비스이용이 끝나면, 대기중인 유저들은 순차적으로 권한을 부여받습니다. <br><br>
  <br>
- 
+
+ <details>
+<summary>부하 테스트 설계 와 장애대응</summary>
+
+ <br>  
+  Link : [https://ggplay149.tistory.com/50](https://ggplay149.tistory.com/51)
+  
+  <br>
+<br>
+</details>
+
+ <br>
  <details>
 <summary>트랜잭션 분석과 책임 분리 설계 문서</summary>
 
@@ -41,7 +52,6 @@ TDD를 기반으로한 콘서트 예약 시스템 입니다.<br><br>
 
 </details>
 
- <br>
 
  
 
