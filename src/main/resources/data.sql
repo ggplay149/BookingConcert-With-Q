@@ -9,7 +9,16 @@ INSERT INTO reservation (reservation_number,reservation_date,title,seat_num,user
 INSERT INTO reservation (reservation_number,reservation_date,title,seat_num,user_id,final_confirm) VALUES('20241112.5.7','20241112','MuseConcert',7,3,'Y');
 INSERT INTO reservation (reservation_number,reservation_date,title,seat_num,user_id,final_confirm) VALUES('20241112.5.9','20241112','MuseConcert',9,1,'N');
 
-INSERT INTO users (point) VALUES(100000);
-INSERT INTO users (point) VALUES(70000);
-INSERT INTO users (point) VALUES(80000);
-INSERT INTO users (point) VALUES(2);
+-- Create a temporary table to hold numbers from 1 to 100
+CREATE TEMPORARY TABLE temp_numbers (num INT);
+
+-- Fill the temporary table with numbers 1 to 100
+INSERT INTO temp_numbers (num)
+SELECT X FROM SYSTEM_RANGE(1, 5000);
+
+-- Use the temporary table to insert 100 rows into the users table
+INSERT INTO users (point)
+SELECT 100000 FROM temp_numbers;
+
+-- Drop the temporary table
+DROP TABLE temp_numbers;
