@@ -1,5 +1,8 @@
 package com.week4.concert.domain.payment.event;
 
+import com.week4.concert.domain.concert.ConcertService;
+import com.week4.concert.domain.reservation.ReservationService;
+import com.week4.concert.domain.user.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -13,10 +16,20 @@ import org.springframework.transaction.event.TransactionalEventListener;
 public class PaymentEventListener {
 
     private final KafkaTemplate<String, Object> kafkaTemplate;
+    private final ReservationService reservationService;
+    private final ConcertService concertService;
+    private final UserService userService;
 
-    @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
-    public void publishMessage(PaymentEvent event) {
-        kafkaTemplate.send("payment", event.userId());
+    @TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
+    public void publishPaymentEvent(PaymentEvent event) {
+
+        reservationService.finalizeConfirmation(event.reservationNumber(), event.reservedConcert().title(), event.userId());
+
+        concertService.increaseReservationCount(event.reservedConcert().id());
+
+        userService.usePoint(event.userId(), event.reservedConcert().price());
+
+        kafkaTemplate.send("payment",event.reservationNumber()+"/"+event.userId());
     }
 }
 

@@ -13,19 +13,30 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class PaymentKafkaConsumer {
+
     private final MessageService messageService;
     private final QueueService queueService;
+    private final ReservationService reservationService;
+
 
     @KafkaListener(topics = "payment", groupId = "payment-message")
     public void sendMessage() {
         messageService.send();
-        log.info(":: 전송완료 ::");
+        log.info(":: 예약정보 외부 전송완료 ::");
     }
 
     @KafkaListener(topics = "payment", groupId = "payment-queue")
-    public void removeActiveUser(Long userId) {
+    public void removeActiveUser(String paymentEvent) {
+        Long userId = Long.valueOf(paymentEvent.split("/")[1]);
         queueService.removeActiveUser(userId);
         log.info(":: 대기열 해제 완료 ::");
+    }
+
+    @KafkaListener(topics = "payment", groupId = "payment-reservation")
+    public void removeTemporaryReservation(String paymentEvent) {
+        String reservationNumber = paymentEvent.split("/")[0];
+        reservationService.removeTemporaryReservation(reservationNumber);
+        log.info(":: 임시예약 해제 완료 ::");
     }
 
 }

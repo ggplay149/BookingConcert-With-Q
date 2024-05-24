@@ -18,7 +18,6 @@ public class PaymentUseCase {
     private final PaymentService paymentService;
     private final ReservationService reservationService;
     private final ConcertService concertService;
-    private final UserService userService;
     private final ApplicationEventPublisher applicationEventPublisher;
 
     @Transactional
@@ -28,13 +27,7 @@ public class PaymentUseCase {
 
         Concert reservedConcert = concertService.getConcertById(reservedConcertId);
 
-        userService.usePoint(userId, reservedConcert.price());
-
         paymentService.pay(reservationNumber, userId);
-
-        reservationService.finalizeConfirmation(reservationNumber,reservedConcert.title(),userId);
-
-        concertService.increaseReservationCount(reservedConcert.id());
 
         applicationEventPublisher.publishEvent(new PaymentEvent(reservationNumber, reservedConcert, userId));
 
