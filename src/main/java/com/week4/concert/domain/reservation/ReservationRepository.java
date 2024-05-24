@@ -16,4 +16,7 @@ public interface ReservationRepository {
 
     String validateExpiration(String key);
 
+    void removeTemporaryReservation(String key);
+
+
 }

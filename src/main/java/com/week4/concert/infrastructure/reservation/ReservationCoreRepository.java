@@ -49,5 +49,10 @@ public class ReservationCoreRepository implements ReservationRepository {
     public String validateExpiration(String key) {
         return redisTemplate.opsForValue().get(key);
     }
+
+    @Override
+    public void removeTemporaryReservation(String key) {
+        redisTemplate.delete(key);
+    }
 }
 
