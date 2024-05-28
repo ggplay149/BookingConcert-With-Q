@@ -1,77 +1,5 @@
 # ConcertBookingServer
 
- <br>
-TDD를 기반으로한 콘서트 예약 시스템 입니다.<br><br>
-콘서트 규모에 맞춰 설정된 동시 최대 인원수만 본 서비스 이용 권한을 갖게 됩니다. <br><br>
-나머지 인원은 대기열 시스템에의해 관리됩니다.<br><br>
-앞선 이용자가 서비스이용이 끝나면, 대기중인 유저들은 순차적으로 권한을 부여받습니다. <br><br>
- <br>
-
- <details>
-<summary>부하 테스트 설계 와 장애대응</summary>
-
- <br>  
-  Link : https://ggplay149.tistory.com/51
-  
-  <br>
-<br>
-</details>
-
- <br>
- <details>
-<summary>트랜잭션 분석과 책임 분리 설계 문서</summary>
-
- <br>  
-  Link : https://ggplay149.tistory.com/50
-  
-  <br>
-<br>
-</details>
-
- <details>
-<summary>ApplicationEvent 와 Kafka 사용을 통한 책임분리 과정 PR</summary>
-
- <br>
-
-- Application Event 활용
-  
- <br>
-
-![image](https://github.com/ggplay149/ConcertBookingServer/assets/142002833/c58b809d-f36b-4d07-a3d9-295f00e7d1f6)
-
-
-
- <br>
- 
-- Kafka 활용
-
- <br>
-
-![image](https://github.com/ggplay149/ConcertBookingServer/assets/142002833/1de85752-5d9a-40a2-83e7-0c76fa2007a4)
-  
-
-</details>
-
-
- 
-
-  <details>
-<summary>쿼리분석 및 개선사항</summary>
-
-- Concert 조회  <br> <br>
-  : 추가/삭제의 빈도가 적고, 높은 Cardinality를 가진 컬럼들이 많지만, 현실적으로 콘서트 일정 자체가 100건이상 있기 힘듦. <br> <br>
-  
-  
-- Reseravation (예약내역) 조회 <br> <br>
-  : 중복이 아예없는 높은 Cardinality의 컬럼 "예약번호"를 인덱스로 잡아 성능 개선 <br>
-  1만건까지의 성능차이는 미비 했으나,
-10만,100만건 조회부터는 쿼리 소요시간에서 30% 이상의 감소
-  
- <br>
-  
-
-</details>
-
   <details>
 <summary>대기열 구현</summary>  
    
@@ -228,22 +156,6 @@ TDD를 기반으로한 콘서트 예약 시스템 입니다.<br><br>
  <br>
  
 </details>
-
-<details>
-<summary>Git branch 전략</summary>
-
-   <br>
-
-Git hub Flow
-
-- dev : 신규 기능 개발 및 수정 진행
-  
-- prd : 서비스 실제 유저에게 제공
-
-  <br>
- 
-</details>
-
 
 <details>
 <summary>Swagger API Docs</summary>  
