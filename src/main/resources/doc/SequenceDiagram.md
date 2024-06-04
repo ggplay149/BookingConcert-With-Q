@@ -1,8 +1,8 @@
 # Sequence Diagram
 
-<h2>유저 토큰 발급 API</h2>
+<h2>Concert 도메인</h2>
 
-![토큰 발급 api](https://github.com/ggplay149/3rdWeek_Concert_Reservation_Server/assets/142002833/067a1ef3-df70-4668-be28-35e2ed06c6c6)
+![image](https://github.com/ggplay149/BookingConcert-With-Q/assets/142002833/bd3b3f1d-eb8e-4b5a-b8b8-2f9c689c5da6)
 
 <h2>예약가능 날짜 API</h2>
 
