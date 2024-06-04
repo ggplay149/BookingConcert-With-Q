@@ -185,5 +185,6 @@
 
 - 외부 이벤트(Kafka) 발행과 소비를 보장하는 OUTBOX 패턴 도입
 - 부하 테스트 문서보고
+- Webflux 도입
     
 </details>
