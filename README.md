@@ -1,7 +1,16 @@
 # BookingConcert-With-Q 
+ <br>
+
+:heavy_check_mark: 대기열시스템을 사용한 안정적인 콘서트 예약 시스템
+
+:heavy_check_mark: TDD 기반 프로젝트
+
+  
+<br>
+
 <details>
 
-<summary>API 설계 :clipboard:</summary>  
+<summary>:clipboard: API 설계 </summary>  
  <br>
 
 
@@ -22,7 +31,7 @@
 
 
 <details>
-<summary>대기열 구현 :inbox_tray: </summary>  
+<summary>:inbox_tray: 대기열 구현  </summary>  
    
  <br>
 
@@ -84,7 +93,7 @@
 
 
  <details>
-<summary>동시성 이슈 처리 :family: </summary>  
+<summary>:family: 동시성 이슈 처리  </summary>  
  <br> 
   
 
