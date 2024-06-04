@@ -1,9 +1,11 @@
 # BookingConcert-With-Q 
  <br>
 
-:heavy_check_mark: 대기열시스템을 사용한 안정적인 콘서트 예약 시스템
+:heavy_check_mark: TDD 기반 콘서트 예약 시스템 
 
-:heavy_check_mark: TDD 기반 프로젝트
+:heavy_check_mark: 대규모 트래픽에 안정적인 대기열 구조 사용
+
+
 
   
 <br>
