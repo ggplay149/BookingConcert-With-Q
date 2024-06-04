@@ -1,4 +1,4 @@
-# ConcertBookingServer
+# BookingConcert-With-Q
 
   <details>
 <summary>대기열 구현</summary>  
