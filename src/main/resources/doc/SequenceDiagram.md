@@ -1,8 +1,12 @@
 # Sequence Diagram
 
-<h2>Concert 도메인</h2>
+<h2>Concert : 예약가능 콘서트 리스트 조회</h2>
 
-![image](https://github.com/ggplay149/BookingConcert-With-Q/assets/142002833/bd3b3f1d-eb8e-4b5a-b8b8-2f9c689c5da6)
+![image](https://github.com/ggplay149/BookingConcert-With-Q/assets/142002833/d69e6683-bbd4-476e-81a8-c5ca03228908)
+
+<h2>Reservation : 예약가능 좌석 리스트 조회</h2>
+
+![image](https://github.com/ggplay149/BookingConcert-With-Q/assets/142002833/31005bf8-454e-47ee-98f8-4e98489c0c96)
 
 <h2>예약가능 날짜 API</h2>
 
@@ -10,7 +14,7 @@
 
 <h2>예약가능 좌석 API</h2>
 
-![가능 좌석 api](https://github.com/ggplay149/3rdWeek_Concert_Reservation_Server/assets/142002833/df86a028-27bb-4817-9e54-6bbf00a86692)
+![image](https://github.com/ggplay149/BookingConcert-With-Q/assets/142002833/31005bf8-454e-47ee-98f8-4e98489c0c96)
 
 <h2>좌석 예약 요청 API</h2>
 
