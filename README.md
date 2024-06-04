@@ -1,8 +1,7 @@
-# BookingConcert-With-Q
-
+# BookingConcert-With-Q 
 <details>
 
-<summary>API 설계</summary>  
+<summary>API 설계 :clipboard:</summary>  
  <br>
 
 
@@ -23,7 +22,7 @@
 
 
 <details>
-<summary>대기열 구현</summary>  
+<summary>대기열 구현 :inbox_tray: </summary>  
    
  <br>
 
@@ -85,7 +84,7 @@
 
 
  <details>
-<summary>동시성 이슈 처리</summary>  
+<summary>동시성 이슈 처리 :family: </summary>  
  <br> 
   
 
