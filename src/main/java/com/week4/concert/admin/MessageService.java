@@ -20,7 +20,7 @@ public class MessageService {
                     .bodyToMono(String.class)
                     .block(); // 응답을 기다리고 결과를 받음
         }catch (Exception e){
-            throw new RuntimeException(":: Message Exception ::");
+            //throw new RuntimeException(":: Message Exception ::");
 
         }
     }

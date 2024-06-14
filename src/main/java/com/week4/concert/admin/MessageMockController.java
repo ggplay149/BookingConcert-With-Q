@@ -11,6 +11,7 @@ public class MessageMockController {
 
     @GetMapping("/{userId}/send")
     public String send(@PathVariable Long userId) {
-        throw new RuntimeException(":: Message Send Exception ::");
+       // throw new RuntimeException(":: Message Send Exception ::");
+        return "Sueccess";
     }
 }

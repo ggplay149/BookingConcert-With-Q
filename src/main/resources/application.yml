@@ -1,4 +1,5 @@
 spring:
+
   application:
     name: concert
 
@@ -26,4 +27,4 @@ spring:
         web-allow-others: true
 
 MAX_ACTIVE_USER: 50
-EXPIRTAION_TIME: 15
+EXPIRATION_TIME: 15

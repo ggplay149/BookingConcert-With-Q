@@ -15,7 +15,7 @@ public class QueueService {
     @Value("${MAX_ACTIVE_USER}")
     private Long maxActiveUsers;
 
-    @Value("${EXPIRTAION_TIME}")
+    @Value("${EXPIRATION_TIME}")
     private Long ExpirationTime;
 
     private final QueueAppender queueAppender;

@@ -7,11 +7,13 @@ import com.week4.concert.domain.payment.event.PaymentEvent;
 import com.week4.concert.domain.reservation.ReservationService;
 import com.week4.concert.domain.user.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 @Component
+@Slf4j
 @RequiredArgsConstructor
 public class PaymentUseCase {
 
@@ -30,6 +32,7 @@ public class PaymentUseCase {
         paymentService.pay(reservationNumber, userId);
 
         applicationEventPublisher.publishEvent(new PaymentEvent(reservationNumber, reservedConcert, userId));
+
 
         return "정상 결제되었습니다. 예약이 확정되었습니다.";
     }
