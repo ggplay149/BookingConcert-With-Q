@@ -21,12 +21,7 @@
   
 - Sequence diagram : https://github.com/ggplay149/ConcertBookingServer/blob/main/src/main/resources/doc/SequenceDiagram.md
 
-- Swagger Docs :
- <br>
- 
-  ![스크린샷 2024-04-18 175910](https://github.com/ggplay149/3rdWeek_Concert_Reservation_Server/assets/142002833/e136979c-20c4-45cf-aa6f-2c14ff242ee1)
 
- <br>
  
 </details>
 
