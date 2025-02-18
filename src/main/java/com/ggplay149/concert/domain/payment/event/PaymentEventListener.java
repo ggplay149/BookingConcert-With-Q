@@ -1,10 +1,6 @@
 package com.ggplay149.concert.domain.payment.event;
 
-import com.ggplay149.concert.domain.concert.ConcertService;
 import com.ggplay149.concert.domain.queue.QueueService;
-import com.ggplay149.concert.domain.reservation.ReservationService;
-import com.ggplay149.concert.domain.user.UserService;
-import jakarta.persistence.Access;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Async;
@@ -30,7 +26,7 @@ public class PaymentEventListener {
     @Async
     @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
     public void removeActiveToken(PaymentEvent event) {
-        log.info(":: 성공후 유저 권한 해제 ::");
+        log.info(":: 성공 후 유저 권한 해제 ::");
         queueService.removeActiveUser(event.userId());
     }
 
