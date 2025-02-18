@@ -42,8 +42,8 @@ public class ConcertReaderTest {
         //when
         List<Concert> result = concertReader.findAvailableConcertAndDate();
         //then
-        assert result.get(0).capacity()>result.get(0).reservedCount();
-        assert result.get(1).capacity()>result.get(1).reservedCount();
+        assert result.get(0).getCapacity()>result.get(0).getReservedCount();
+        assert result.get(1).getCapacity()>result.get(1).getReservedCount();
     }
 
 }

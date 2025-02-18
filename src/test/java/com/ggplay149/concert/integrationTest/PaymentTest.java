@@ -78,6 +78,7 @@ public class PaymentTest {
 
         //given : 신규 예약생성
         reservationUseCase.createTemporaryReservation("20241112","MuseConcert",1L,48);
+        userService.chargePoint(1L,100000);
 
         //when
         String reservationNumber = "20241112.5.48";
