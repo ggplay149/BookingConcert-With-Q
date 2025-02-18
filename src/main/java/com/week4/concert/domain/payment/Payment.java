@@ -1,8 +1,12 @@
 package com.week4.concert.domain.payment;
 
-public record Payment(
-        Long paymentId,
-        String reservationNumber,
-        Long userId
-) {
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+@Data
+@AllArgsConstructor
+public class Payment {
+    private Long paymentId;
+    private String reservationNumber;
+    private Long userId;
 }

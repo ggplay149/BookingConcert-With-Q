@@ -1,14 +1,15 @@
 package com.week4.concert.domain.concert;
 
-public record Concert(
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
-        Long id,
-        String title,
-        Integer capacity,
-        Integer reservedCount,
-        Integer price,
-        String date
-) {
-
+@Data
+@AllArgsConstructor
+public class Concert {
+    private Long id;
+    private String title;
+    private Integer capacity;
+    private Integer reservedCount;
+    private Integer price;
+    private String date;
 }
-

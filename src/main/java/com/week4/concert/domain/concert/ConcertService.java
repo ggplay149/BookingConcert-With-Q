@@ -36,7 +36,7 @@ public class ConcertService {
     public List<String> showAvailableConcertList() {
         List<String> list = new ArrayList<>();
         for (Concert c : concertReader.findAvailableConcertAndDate()) {
-            String form = "[ " + c.date() + " / " + c.title() + " ]";
+            String form = "[ " + c.getDate() + " / " + c.getTitle() + " ]";
             list.add(form);
         }
         return list;

@@ -19,9 +19,9 @@ public class ReservationUseCase {
     @Transactional(readOnly = true)
     public List<Integer> selectAvailableSeat(String date, String title) {
 
-        Integer capactiy = concertService.getConcertByTitle(date, title).capacity();
+        Integer capacity = concertService.getConcertByTitle(date, title).getCapacity();
 
-        List<Integer> availableSeat = reservationService.getAvailableSeat(date, title, capactiy);
+        List<Integer> availableSeat = reservationService.getAvailableSeat(date, title, capacity);
 
         return availableSeat;
     }
@@ -30,7 +30,7 @@ public class ReservationUseCase {
     @Transactional
     public String createTemporaryReservation(String date, String title, Long userId, Integer seatNum) {
 
-        Long concertId = concertService.getConcertByTitle(date, title).id();
+        Long concertId = concertService.getConcertByTitle(date, title).getId();
 
         String reservationNumber = date+"."+concertId+"."+seatNum;
 

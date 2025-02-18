@@ -1,7 +1,11 @@
 package com.week4.concert.domain.user;
 
-public record User(
-        Long id,
-        Integer point
-) {
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+@Data
+@AllArgsConstructor
+public class User {
+    private Long id;
+    private Integer point;
 }
