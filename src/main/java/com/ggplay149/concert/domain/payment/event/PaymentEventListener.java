@@ -23,11 +23,11 @@ public class PaymentEventListener {
     @TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
     public void publishPaymentEvent(PaymentEvent event) {
 
-        reservationService.finalizeConfirmation(event.reservationNumber(), event.reservedConcert().title(), event.userId());
+        reservationService.finalizeConfirmation(event.reservationNumber(), event.reservedConcert().getTitle(), event.userId());
 
-        concertService.increaseReservationCount(event.reservedConcert().id());
+        concertService.increaseReservationCount(event.reservedConcert().getId());
 
-        userService.usePoint(event.userId(), event.reservedConcert().price());
+        userService.usePoint(event.userId(), event.reservedConcert().getPrice());
 
         kafkaTemplate.send("payment",event.reservationNumber()+"/"+event.userId());
     }
