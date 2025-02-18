@@ -5,6 +5,7 @@ import com.ggplay149.concert.domain.concert.ConcertService;
 import com.ggplay149.concert.domain.payment.PaymentService;
 import com.ggplay149.concert.domain.payment.event.PaymentEvent;
 import com.ggplay149.concert.domain.reservation.ReservationService;
+import com.ggplay149.concert.domain.user.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationEventPublisher;
@@ -19,6 +20,7 @@ public class PaymentUseCase {
     private final PaymentService paymentService;
     private final ReservationService reservationService;
     private final ConcertService concertService;
+    private final UserService userService;
     private final ApplicationEventPublisher applicationEventPublisher;
 
     @Transactional
@@ -30,7 +32,14 @@ public class PaymentUseCase {
 
         paymentService.pay(reservationNumber, userId);
 
+        reservationService.finalizeConfirmation(reservationNumber, reservedConcert.getTitle(), userId);
+
+        concertService.increaseReservationCount(reservedConcert.getId());
+
+        userService.usePoint(userId, reservedConcert.getPrice());
+
         applicationEventPublisher.publishEvent(new PaymentEvent(reservationNumber, reservedConcert, userId));
+
 
 
         return "정상 결제되었습니다. 예약이 확정되었습니다.";
